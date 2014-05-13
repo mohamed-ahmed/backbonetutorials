@@ -14,7 +14,8 @@ define([
       // Define some URL routes
       'projects': 'showProjects',
       'users': 'showContributors',
-      
+      'apps': 'showApps',
+
       // Default
       '*actions': 'defaultAction'
     }
@@ -37,6 +38,12 @@ define([
         // Like above, call render but know that this view has nested sub views which 
         // handle loading and displaying data from the GitHub API  
         var contributorsView = new ContributorsView();
+    });
+
+    app_router.on('route:showApps', function () {
+    
+
+        var appsView = new AppsView();
     });
 
     app_router.on('route:defaultAction', function (actions) {
