@@ -2,70 +2,43 @@ define([
   'jquery',
   'underscore',
   'backbone',
-  'collections/contributors/ContributorsCollection',
-  'views/contributors/ContributorsListView',
-  'text!templates/contributors/contributorsTemplate.html'
-], function($, _, Backbone, ContributorsCollection, ContributorsListView, contributorsTemplate){
+  'views/sidebar/SidebarView',
+  'models/AppModel',
+  'collections/AppsCollection',
+  'views/AppsListView',
+  'text!templates/appsTemplate.html'
+], function($, _, Backbone, SidebarView, AppModel, AppsCollection, AppsListView, appsTemplate){
 
-  //var contributorsListView;
-
-  var ContributorsView = Backbone.View.extend({
-    
+  var AppsView = Backbone.View.extend({
     el: $("#page"),
-
-    initialize:function() {
-
-      var that = this;
-
-      var onDataHandler = function(collection) {
-          that.render();
-      }
-
-      that.collection = new ContributorsCollection([]); 
-      that.collection.fetch({ success : onDataHandler, dataType: "jsonp" });
-
-    },
-
     render: function(){
-
       $('.menu li').removeClass('active');
       $('.menu li a[href="'+window.location.hash+'"]').parent().addClass('active');
+      this.$el.html(appsTemplate);
 
-      var total_contributions = this.getTotalContributions(this.collection.models);
-      var total_contributors = this.collection.models.length;  
-    
-      var data = { total_contributions : total_contributions, 
-                  total_contributors : total_contributors}; 
+      var app0 = new AppModel({title: 'Cross Domain', url: 'https://github.com/thomasdavis/backbonetutorials/tree/gh-pages/examples/cross-domain'}); 
+      var app1 = new AppModel({title:'Infinite Scroll', url: 'https://github.com/thomasdavis/backbonetutorials/tree/gh-pages/examples/infinite-scroll'}); 
+      var app2 = new AppModel({title:'Modular Backbone', url: 'https://github.com/thomasdavis/backbonetutorials/tree/gh-pages/examples/modular-backbone'}); 
+      var app3 = new AppModel({title:'Node MongoDB Mongoose Restify', url: 'https://github.com/thomasdavis/backbonetutorials/tree/gh-pages/examples/nodejs-mongodb-mongoose-restify'});
+      var app4 = new AppModel({title:'Todo App', url: 'https://github.com/thomasdavis/backbonetutorials/tree/gh-pages/examples/todo-app'});
 
-      // main view  
-      var compiledTemplate = _.template( contributorsTemplate, data );
-      this.$el.html( compiledTemplate ); 
+      var aApps = [app0, 
+                      app1,
+                      app2,
+                      app3,
+                      app4];
 
-      // sub view 
-      var contributorsListView = new ContributorsListView({ collection: this.collection}); 
-      contributorsListView.render();
-
-    },
-
-    getTotalContributions:function( aModels ){
-
-      var total = 0;
+      var appsCollection = new AppsCollection(aApps);  
+      var appsListView = new AppsListView({ collection: appsCollection}); 
       
-      _.each(aModels, function(contributorModel) { 
-         var contributorContributions = Number ( contributorModel.get("contributions") );
-         total += contributorContributions; 
-      });
+      appsListView.render(); 
 
-      return total; 
-    },
+      // add the sidebar 
+      var sidebarView = new SidebarView();
+      sidebarView.render();
 
-    clearListView: function() {
-      console.log("clearing sub view");
-      contributorsListView.clearListView();
     }
-
-
-
   });
-  return ContributorsView;
+
+  return AppsView;
 });

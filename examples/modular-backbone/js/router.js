@@ -6,8 +6,9 @@ define([
   'views/home/HomeView',
   'views/projects/ProjectsView',
   'views/contributors/ContributorsView',
-  'views/footer/FooterView'
-], function($, _, Backbone, HomeView, ProjectsView, ContributorsView, FooterView) {
+  'views/footer/FooterView',
+  'views/AppsView'
+], function($, _, Backbone, HomeView, ProjectsView, ContributorsView, FooterView, AppsView) {
   
   var AppRouter = Backbone.Router.extend({
     routes: {
@@ -44,6 +45,8 @@ define([
     
 
         var appsView = new AppsView();
+        appsView.render();
+
     });
 
     app_router.on('route:defaultAction', function (actions) {

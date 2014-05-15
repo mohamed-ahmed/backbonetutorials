@@ -3,10 +3,7 @@ define([
   'backbone'
 ], function(_, Backbone) {
   
-  var ProjectModel = Backbone.Model.extend({
-
-  	
-  });
+  var AppModel = Backbone.Model.extend({});
 
   return AppModel;
 
