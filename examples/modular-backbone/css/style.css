@@ -3,7 +3,7 @@
    Primary styles
    Author: 
    ========================================================================== */
-body {
+/*body {
   background: #ebebeb;
 }
 
@@ -284,5 +284,15 @@ h1{
     color:#333;
     margin:0px;
     padding:0px;
- }
+ }*/
 
+#icon{
+  width:200px;
+  height:200px;
+  border-radius: 20px;
+  border: 1px solid;
+  border-color: black;
+  margin: 10px;
+  text-align: center;
+  overflow: hidden
+}

@@ -10,7 +10,7 @@ define([
 ], function($, _, Backbone, SidebarView, AppModel, AppsCollection, AppsListView, appsTemplate){
 
   var AppsView = Backbone.View.extend({
-    el: $("#page"),
+    el: $("#mostVisited_div"),
     render: function(){
       $('.menu li').removeClass('active');
       $('.menu li a[href="'+window.location.hash+'"]').parent().addClass('active');

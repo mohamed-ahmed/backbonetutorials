@@ -21,7 +21,7 @@ define([
           console.log(this.el);
 
           console.log($("#apps-list")[0]);
-          $("#apps-list").append(elem);
+          $("#mostVisited_div").append(elem);
 
           return this;
         }
