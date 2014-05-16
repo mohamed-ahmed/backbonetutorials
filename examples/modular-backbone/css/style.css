@@ -296,3 +296,10 @@ h1{
   text-align: center;
   overflow: hidden
 }
+
+#url-text{
+/*  color:white;
+*/  font-size: 18pt;
+  max-width: 168px;
+  word-wrap: break-word;
+}
