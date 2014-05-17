@@ -18,7 +18,7 @@ define([
       'apps': 'showApps',
 
       // Default
-      '*actions': 'defaultAction'
+      '*actions': 'showApps'
     }
   });
   
