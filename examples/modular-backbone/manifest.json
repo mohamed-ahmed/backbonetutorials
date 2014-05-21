@@ -1,0 +1,24 @@
+{
+	"name": "Smart New Tab Page 2",
+	"description": "Creats app icons for your most visited sites",
+
+	"permissions": ["topSites", "<all_urls>"],
+	"content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["js/main.js"]
+    }],
+
+
+	"version": "0.1",
+	"incognito": "split",
+	"chrome_url_overrides": {
+		"newtab": "index.html"
+		},
+
+	"manifest_version": 2,
+
+	"content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+
+
+}

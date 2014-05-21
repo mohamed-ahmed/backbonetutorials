@@ -18,9 +18,12 @@ define([
 				xhr.onreadystatechange = function() {
 					if (xhr.readyState == 4) {
 						// JSON.parse does not evaluate the attacker's scripts.
-						//var resp = JSON.parse(xhr.responseText);
+						var resp = JSON.parse(xhr.responseText);
 						//console.log(xhr.responseText);
+
 						html = $(xhr.responseText);
+						console.log("html: ");
+						console.log(html);
 						//console.log(domObj);
 					}
 				}
