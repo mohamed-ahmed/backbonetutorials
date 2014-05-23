@@ -20,8 +20,8 @@ define([
       var apps = [];
       chrome.topSites.get(function(localTopSites){
         topSites = localTopSites;
-        console.log("topSites: ");
-        console.log(topSites);
+        //console.log("topSites: ");
+        //console.log(topSites);
         topSites.forEach(function (elem){
           apps.push(new AppModel(elem));
         });
