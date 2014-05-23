@@ -28,8 +28,8 @@ define([
 
 
         var appView = new AppView({model:elem});
-        console.log("appView: ");
-        console.log(appView);
+        //console.log("appView: ");
+        //console.log(appView);
         appView.render();
 
       });
