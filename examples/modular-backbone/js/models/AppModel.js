@@ -7,7 +7,7 @@ define([
 		var AppModel = Backbone.Model.extend({
 
 			initialize: function(){
-				Utils.getHTML(this.attributes.url, Utils.getBestImageURL );
+				Utils.getBestImageURL(this.attributes.url );
 			}
 
 

@@ -31,30 +31,34 @@ var globalHTML;
 					//console.log(html.find('meta[property="og:image"]'));
 					//console.log("html: ");
 					//console.log(jqueryHTML);
-					callback(url, html);
+					callback(html);
 				}
 			};
 			xhr.send();
 
 		};
 
-		Utils.getBestImageURL = function(pageURL, jqueryHTML){
-			var imageURL;
-			for(var i = 0; i < jqueryHTML.length; i++){
-				if((jqueryHTML[i]).nodeName == "LINK" ){
-					if(jqueryHTML[i].rel && jqueryHTML[i].href){
-						if(jqueryHTML[i].rel.indexOf("touch-icon") >= 0 ){
-							console.log(jqueryHTML[i]);
-							imageURL =  jqueryHTML[i].href
+		Utils.getBestImageURL = function(pageURL){
+
+			this.getHTML(pageURL, function(jqueryHTML){
+
+				var imageURL;
+				for(var i = 0; i < jqueryHTML.length; i++){
+					if((jqueryHTML[i]).nodeName == "LINK" ){
+						if(jqueryHTML[i].rel && jqueryHTML[i].href){
+							if(jqueryHTML[i].rel.indexOf("touch-icon") >= 0 ){
+								console.log(jqueryHTML[i]);
+								imageURL =  jqueryHTML[i].href
+							}
+							
 						}
-						
 					}
 				}
-			}
 
-			console.log("getBestImageURL: ");
-			console.log(imageURL);
+				console.log("getBestImageURL: ");
+				console.log(imageURL);
 
+			});
 
 		};
 
