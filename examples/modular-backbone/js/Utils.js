@@ -53,6 +53,18 @@ var globalHTML;
 							
 						}
 					}
+					else if((jqueryHTML[i]).nodeName == "META" ){
+						console.log("\n\n\nMETA\n\n\n")
+						if(jqueryHTML[i].attributes["property"] && jqueryHTML[i].content){
+							console.log("\n\n\nproperty: ");
+							console.log(jqueryHTML[i].attributes["property"]);
+							if(jqueryHTML[i].property.indexOf("og:image") >= 0 ){
+								console.log(jqueryHTML[i]);
+								imageURL =  jqueryHTML[i].content
+							}
+							
+						}
+					}
 				}
 
 				console.log("getBestImageURL: ");
