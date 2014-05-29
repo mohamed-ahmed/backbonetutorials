@@ -7,7 +7,12 @@ define([
 		var AppModel = Backbone.Model.extend({
 
 			initialize: function(){
-				Utils.getBestImageURL(this.attributes.url );
+				var model = this;
+				Utils.getBestImageURL(this.attributes.url, function (imageUrl){
+					model.attributes.imageUrl = imageUrl;
+					console.log("AppModel: ")
+					console.log(model);
+				} );
 			}
 
 

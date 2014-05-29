@@ -38,7 +38,7 @@
 
 		};
 
-		Utils.getBestImageURL = function(pageURL){
+		Utils.getBestImageURL = function(pageURL, callback){
 
 			this.getHTML(pageURL, function(jqueryHTML){
 
@@ -76,6 +76,7 @@
 
 				console.log("getBestImageURL: ");
 				console.log(imageURL);
+				callback(imageURL);
 
 			});
 
