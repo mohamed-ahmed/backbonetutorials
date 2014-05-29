@@ -69,6 +69,11 @@
 							
 						}
 					}
+					else if((jqueryHTML[i]).nodeName == "DIV" ){
+						imageURL = Utils.getFaviconUrl(pageURL);
+						console.log("reached a div")
+						break;
+					}
 				}
 				if(!imageURL){
 					imageURL = Utils.getFaviconUrl(pageURL);
