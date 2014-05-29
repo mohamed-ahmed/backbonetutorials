@@ -47,8 +47,11 @@
 					if((jqueryHTML[i]).nodeName == "LINK" ){
 						if(jqueryHTML[i].rel && jqueryHTML[i].href){
 							if(jqueryHTML[i].rel.indexOf("touch-icon") >= 0 ){
-								console.log(jqueryHTML[i]);
-								imageURL =  jqueryHTML[i].href
+								console.log("has touch icon")
+								console.log(jqueryHTML[i].attributes["href"].value);
+								imageURL =  jqueryHTML[i].attributes["href"].value;
+								imageURL = Utils.getFullImageURL(pageURL, imageURL);
+								break;
 							}
 							
 						}
@@ -58,13 +61,17 @@
 						if(jqueryHTML[i].attributes["property"] && jqueryHTML[i].content){
 							console.log("\n\n\nproperty: ");
 							console.log(jqueryHTML[i].attributes["property"]);
-							if(jqueryHTML[i].property.indexOf("og:image") >= 0 ){
+							if(jqueryHTML[i].attributes["property"].value.indexOf("og:image") >= 0 ){
 								console.log(jqueryHTML[i]);
-								imageURL =  jqueryHTML[i].content
+								imageURL =  jqueryHTML[i].content;
+								imageURL = Utils.getFullImageURL(pageURL, imageURL);
 							}
 							
 						}
 					}
+				}
+				if(!imageURL){
+					imageURL = Utils.getFaviconUrl(pageURL);
 				}
 
 				console.log("getBestImageURL: ");
@@ -83,7 +90,7 @@
 			});
 		};
 
-		Utils.getFaviconUrl = function (url){
+		Utils.getFaviconUrl = function(url){
 			var faviconUrl;
 			if(url.indexOf("/", 8) > 0 ){
 				faviconUrl = url.slice( 0, url.indexOf("/", 8)) + "/favicon.ico";
@@ -95,7 +102,29 @@
 			return faviconUrl;
 		};
 
+		Utils.getFullImageURL = function (siteUrl, imagePath){
+			var absUrl;
 
+			if(imagePath.indexOf("//") == 0){
+				absUrl = "http:" + imagePath;
+			}
+
+			else if(imagePath.indexOf("http") >= 0){
+				absUrl = imagePath;
+			}
+			else if(imagePath.indexOf("/") == 0){
+				var thirdOccurenceOfSlash = siteUrl.indexOf("/",7);
+				absUrl = siteUrl.slice(0, thirdOccurenceOfSlash) + imagePath;
+			}
+			else if( siteUrl.indexOf("/",7) >=0 ){
+				var thirdOccurenceOfSlash = siteUrl.indexOf("/",7);
+				absUrl = siteUrl.slice(0, thirdOccurenceOfSlash + 1) + imagePath;
+			}
+			else{
+				absUrl = siteUrl + imagePath;
+			}
+			return absUrl;
+		}
 
 		return Utils;
 
