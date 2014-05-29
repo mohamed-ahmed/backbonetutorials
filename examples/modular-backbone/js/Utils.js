@@ -3,7 +3,7 @@
  *
  */
 
-var globalHTML;
+ var globalHTML;
 
  define([
  	'underscore',
@@ -19,7 +19,7 @@ var globalHTML;
  			xhr.open("GET", url, true);
  			xhr.onreadystatechange = function(){
  				if (xhr.readyState == 4) {
-		 			console.log("getting html for: " + url);
+ 					console.log("getting html for: " + url);
 					// JSON.parse does not evaluate the attacker's scripts.
 					//var resp = JSON.parse(xhr.responseText);
 					//console.log(xhr.responseText);
@@ -74,9 +74,32 @@ var globalHTML;
 
 		};
 
-	return Utils;
+		Utils.tryImage = function(url, success, failure){
+			$.ajax({
+				type: "GET",
+				url: url,
+				success: success,
+				error: failure
+			});
+		};
 
-});
+		Utils.getFaviconUrl = function (url){
+			var faviconUrl;
+			if(url.indexOf("/", 8) > 0 ){
+				faviconUrl = url.slice( 0, url.indexOf("/", 8)) + "/favicon.ico";
+			}
+			else{
+				faviconUrl = url + "favicon.ico";
+			}
+
+			return faviconUrl;
+		};
+
+
+
+		return Utils;
+
+	});
 
 function hasProperty(domElement){
 
