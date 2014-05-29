@@ -16,6 +16,16 @@ define([
           //console.log("this.model: ");
           //console.log(this.model);
           this.$el.html(this.template(this.model.attributes));
+          var model = this.model;
+          var $el = this.$el;
+
+          model.on("change", function(){
+            if(model.hasChanged("imageUrl")){
+              console.log("\n\nimage url changed\n\n");
+              $el.find("#icon-img").attr("src", model.get("imageUrl"));
+            }
+          });
+
           var elem = this.el;
           //console.log("this.el: ");
           //console.log(this.el);

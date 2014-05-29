@@ -23,6 +23,7 @@ define([
         //console.log("topSites: ");
         //console.log(topSites);
         topSites.forEach(function (elem){
+          elem.imageUrl = null;
           apps.push(new AppModel(elem));
         });
 

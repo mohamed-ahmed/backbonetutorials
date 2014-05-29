@@ -114,10 +114,10 @@
 				absUrl = imagePath;
 			}
 			else if(imagePath.indexOf("/") == 0){
-				var thirdOccurenceOfSlash = siteUrl.indexOf("/",7);
+				var thirdOccurenceOfSlash = siteUrl.indexOf("/",8);
 				absUrl = siteUrl.slice(0, thirdOccurenceOfSlash) + imagePath;
 			}
-			else if( siteUrl.indexOf("/",7) >=0 ){
+			else if( siteUrl.indexOf("/",8) >=0 ){
 				var thirdOccurenceOfSlash = siteUrl.indexOf("/",7);
 				absUrl = siteUrl.slice(0, thirdOccurenceOfSlash + 1) + imagePath;
 			}

@@ -287,19 +287,63 @@ h1{
  }*/
 
 #icon{
-  width:200px;
-  height:200px;
-  border-radius: 20px;
-  border: 1px solid;
-  border-color: black;
+  width:16vh;
+  height:16vh;
+  border-radius: 2vh;
+  /*border: 1px solid;
+  border-color: white;*/
   margin: 10px;
   text-align: center;
-  overflow: hidden
+  overflow: hidden;
+  background-color: rgba(255, 255, 255, 0.23);
+  color:black;
+}
+
+#icon:hover{
+  background-color: rgba(255, 255, 255, 0.56)
+}
+
+body{
+  background: #527CFF; /* Old browsers */
+  background: -moz-linear-gradient(top,  #527CFF 0%, #C0FFFA 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#527CFF), color-stop(100%,#C0FFFA)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  #527CFF 0%,#C0FFFA 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  #527CFF 0%,#C0FFFA 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  #527CFF 0%,#C0FFFA 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  #527CFF 0%,#C0FFFA 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#527CFF', endColorstr='#C0FFFA',GradientType=0 ); /* IE6-9 */
+
+  background-repeat:no-repeat;
+  background-attachment:fixed;
 }
 
 #url-text{
-/*  color:white;
-*/  font-size: 18pt;
+  color:inherit;
+  font-size: 2vh;
   max-width: 168px;
   word-wrap: break-word;
+}
+
+body{
+  height:100vh
+}
+
+#search-box{
+  width:100%;
+  margin-top: 100px;
+  margin-bottom : 40px;
+  font-size: 20px;
+}
+
+#icon-img{
+  height: 5vh;
+  width: 5vh;
+  margin: auto;
+  margin-top: 1.6vh;
+  margin-bottom: 0.8vh;
+  display:block;
+}
+
+#mostVisited_div{
+  margin-left: 10px;
 }
