@@ -138,10 +138,34 @@
 			return absUrl;
 		}
 
+
+		Utils.imgToDataURL = function(url, callback, outputFormat, quality) {
+			var canvas = document.createElement('CANVAS'),
+				ctx = canvas.getContext('2d'),
+				img = new Image();
+			img.onload = function() {
+				var dataURL;
+				canvas.height = img.height;
+				canvas.width = img.width;
+				try {
+					ctx.drawImage(img, 0, 0);
+					dataURL = canvas.toDataURL(outputFormat, quality);
+					callback(null, dataURL);
+				} catch (e) {
+					callback(e, null);
+				}
+				canvas = img = null;
+			};
+			img.onerror = function() {
+				callback(new Error('Could not load image'), null);
+			};
+			img.src = url;
+		}
+
+
+
+
 		return Utils;
 
 	});
 
-function hasProperty(domElement){
-
-}
