@@ -62,12 +62,19 @@
 							console.log("\n\n\nproperty: ");
 							console.log(jqueryHTML[i].attributes["property"]);
 							if(jqueryHTML[i].attributes["property"].value.indexOf("og:image") >= 0 ){
+								console.log("og:image found: ");
+								console.log(jqueryHTML[i].content);
 								console.log(jqueryHTML[i]);
 								imageURL =  jqueryHTML[i].content;
 								imageURL = Utils.getFullImageURL(pageURL, imageURL);
 							}
 							
 						}
+					}
+					else if( !imageURL && (jqueryHTML[i]).nodeName == "DIV" ){
+						imageURL = Utils.getFaviconUrl(pageURL);
+						console.log("reached a div")
+						break;
 					}
 				}
 				if(!imageURL){
@@ -104,6 +111,7 @@
 		};
 
 		Utils.getFullImageURL = function (siteUrl, imagePath){
+			console.log("getting full path for:" + siteUrl + ", " + imagePath);
 			var absUrl;
 
 			if(imagePath.indexOf("//") == 0){
@@ -124,6 +132,9 @@
 			else{
 				absUrl = siteUrl + imagePath;
 			}
+
+			console.log("full path is:  " + absUrl);
+
 			return absUrl;
 		}
 
