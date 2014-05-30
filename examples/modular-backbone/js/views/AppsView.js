@@ -18,11 +18,23 @@ define([
 
       var topSites;
       var apps = [];
+
+      function get(key){
+        chrome.storage.sync.get(key, function(value) {
+          console.log("getting: " + key);
+          console.log(value);
+          console.log(" loaded");
+        });
+      }
+
+
+
       chrome.topSites.get(function(localTopSites){
         topSites = localTopSites;
         //console.log("topSites: ");
         //console.log(topSites);
         topSites.forEach(function (elem){
+          get(elem.url);
           elem.imageUrl = null;
           apps.push(new AppModel(elem));
         });

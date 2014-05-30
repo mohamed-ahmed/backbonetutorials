@@ -23,10 +23,23 @@ define([
 						Utils.imgToDataURL(imageUrl, function(err, resultString){
 							console.log("base64 url: ");
 							console.log(resultString);
+							model.attributes.imageUrl = resultString;
+							save(model.attributes.url, model.attributes);
 						});
 					} );
 				}
+			
+
+				function save(key, value){
+					chrome.storage.sync.set({key: value}, function() {
+				        console.log(value);
+				        console.log(' saved');
+			        });
+				}
+
 			}
+
+			
 
 
 
