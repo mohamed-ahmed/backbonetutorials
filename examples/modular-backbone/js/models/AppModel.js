@@ -24,14 +24,16 @@ define([
 							console.log("base64 url: ");
 							console.log(resultString);
 							model.attributes.imageUrl = resultString;
-							save(model.attributes.url, model.attributes);
+							save( Utils.stripUrl( model.attributes.url ), model.attributes);
 						});
 					} );
 				}
 			
 
 				function save(key, value){
-					chrome.storage.sync.set({key: value}, function() {
+					chrome.storage.local.set( { key: value}, function() {
+						console.log("saving: ");
+						console.log(key);
 				        console.log(value);
 				        console.log(' saved');
 			        });

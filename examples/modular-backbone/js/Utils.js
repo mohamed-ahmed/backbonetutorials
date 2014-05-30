@@ -173,6 +173,10 @@
 			img.src = url;
 		}
 
+		Utils.stripUrl = function(url){
+			return url.split("//")[1].split("/")[0];
+		}
+
 
 
 

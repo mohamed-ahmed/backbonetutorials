@@ -6,8 +6,9 @@ define([
   'models/AppModel',
   'collections/AppsCollection',
   'views/AppsListView',
-  'text!templates/appsTemplate.html'
-], function($, _, Backbone, SidebarView, AppModel, AppsCollection, AppsListView, appsTemplate){
+  'text!templates/appsTemplate.html',
+  'Utils'
+], function($, _, Backbone, SidebarView, AppModel, AppsCollection, AppsListView, appsTemplate, Utils){
 
   var AppsView = Backbone.View.extend({
     el: $("#mostVisited_div"),
@@ -20,9 +21,9 @@ define([
       var apps = [];
 
       function get(key){
-        chrome.storage.sync.get(key, function(value) {
+        chrome.storage.local.get(key, function(value) {
           console.log("getting: " + key);
-          console.log(value);
+          console.log(value[key]);
           console.log(" loaded");
         });
       }
@@ -34,7 +35,8 @@ define([
         //console.log("topSites: ");
         //console.log(topSites);
         topSites.forEach(function (elem){
-          get(elem.url);
+          get("site")
+          //get( Utils.stripUrl( elem.url) );
           elem.imageUrl = null;
           apps.push(new AppModel(elem));
         });
