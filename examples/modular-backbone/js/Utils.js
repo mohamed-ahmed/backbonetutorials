@@ -153,6 +153,7 @@
 			var canvas = document.createElement('CANVAS'),
 				ctx = canvas.getContext('2d'),
 				img = new Image();
+			img.crossOrigin = 'Anonymous';
 			img.onload = function() {
 				var dataURL;
 				canvas.height = img.height;

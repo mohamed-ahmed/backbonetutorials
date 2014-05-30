@@ -20,6 +20,10 @@ define([
 						model.set({"imageUrl" : imageUrl });
 						console.log("AppModel: ")
 						console.log(model);
+						Utils.imgToDataURL(imageUrl, function(err, resultString){
+							console.log("base64 url: ");
+							console.log(resultString);
+						});
 					} );
 				}
 			}
