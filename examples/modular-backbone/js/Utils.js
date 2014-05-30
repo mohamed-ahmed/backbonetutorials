@@ -83,7 +83,17 @@
 
 				console.log("getBestImageURL: ");
 				console.log(imageURL);
-				callback(imageURL);
+				Utils.tryImage(imageURL,
+					function(){				//success
+						console.log("sucess");
+						callback(imageURL);
+					},
+					function(){				//failure
+						console.log("failure");
+						callback("imgs/browser-icon.png")
+					}
+
+				);
 
 			});
 
