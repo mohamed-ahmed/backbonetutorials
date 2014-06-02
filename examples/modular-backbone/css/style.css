@@ -284,12 +284,12 @@ h1{
     color:#333;
     margin:0px;
     padding:0px;
- }*/
+    }*/
 
-#icon{
-  width:16vh;
-  height:16vh;
-  border-radius: 2vh;
+    #icon{
+      width:16vh;
+      height:16vh;
+      border-radius: 2vh;
   /*border: 1px solid;
   border-color: white;*/
   margin: 10px;
@@ -352,4 +352,26 @@ body{
 #my-search-box{
   margin-top: 100px;
   margin-bottom: 20px;
+}
+
+.remove-app-icon{
+  position: absolute !important;
+  right: 1vh !important;
+  top: 1vh !important;
+  color: inherit;
+}
+
+
+
+.remove-icon-wrapper{
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: transparent;
+}
+
+.remove-icon-wrapper:hover{
+  color: gray;
 }
