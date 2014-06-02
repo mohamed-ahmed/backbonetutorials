@@ -1,6 +1,10 @@
 console.log("app started " + (new Date()).getTime() );
 var preLoadedSites = {};
 
+chrome.topSites.get(function(localTopSites){
+  console.log("got top sites at: " + (new Date()).getTime());
+}); 
+
 function get(key){
   chrome.storage.local.get(key, function(value) {
     preLoadedSites[key] = value;
