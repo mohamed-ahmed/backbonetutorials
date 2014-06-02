@@ -35,8 +35,8 @@ define([
         //console.log("topSites: ");
         //console.log(topSites);
         topSites.forEach(function (elem){
-          get("site")
-          //get( Utils.stripUrl( elem.url) );
+          //get("site")
+          get( Utils.stripUrl( elem.url) );
           elem.imageUrl = null;
           apps.push(new AppModel(elem));
         });

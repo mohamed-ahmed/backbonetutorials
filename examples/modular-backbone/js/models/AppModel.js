@@ -28,16 +28,19 @@ define([
 						});
 					} );
 				}
-			
+				
 
 				function save(key, value){
-					chrome.storage.local.set( { key: value}, function() {
+					var keyValueObj = {};
+					keyValueObj[key] = value;
+					chrome.storage.local.set( keyValueObj, function() {
 						console.log("saving: ");
-						console.log(key);
-				        console.log(value);
-				        console.log(' saved');
-			        });
+						console.log(keyValueObj);
+						console.log(keyValueObj[key]);
+						console.log(' saved');
+					});
 				}
+
 
 			}
 
