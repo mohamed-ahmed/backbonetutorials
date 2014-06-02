@@ -8,36 +8,44 @@ define([
   'views/AppsListView',
   'text!templates/appsTemplate.html',
   'Utils'
-], function($, _, Backbone, SidebarView, AppModel, AppsCollection, AppsListView, appsTemplate, Utils){
+  ], function($, _, Backbone, SidebarView, AppModel, AppsCollection, AppsListView, appsTemplate, Utils){
 
-  var AppsView = Backbone.View.extend({
-    el: $("#mostVisited_div"),
-    render: function(){
-      $('.menu li').removeClass('active');
-      $('.menu li a[href="'+window.location.hash+'"]').parent().addClass('active');
-      this.$el.html(appsTemplate);
+    var preLoadedSites = {};
 
-      var topSites;
-      var apps = [];
+    var AppsView = Backbone.View.extend({
+      el: $("#mostVisited_div"),
+      render: function(){
+        $('.menu li').removeClass('active');
+        $('.menu li a[href="'+window.location.hash+'"]').parent().addClass('active');
+        this.$el.html(appsTemplate);
 
-      function get(key){
-        chrome.storage.local.get(key, function(value) {
-          console.log("getting: " + key);
-          console.log(value[key]);
-          console.log(" loaded");
-        });
-      }
+        var topSites;
+        var apps = [];
+
+        function get(key){
+          chrome.storage.local.get(key, function(value) {
+            preLoadedSites[key] = value;
+            console.log("getting: " + key);
+            console.log(value[key]);
+            console.log(" loaded");
+          });
+        }
 
 
 
-      chrome.topSites.get(function(localTopSites){
-        topSites = localTopSites;
+        chrome.topSites.get(function(localTopSites){
+          topSites = localTopSites;
         //console.log("topSites: ");
         //console.log(topSites);
         topSites.forEach(function (elem){
           //get("site")
           get( Utils.stripUrl( elem.url) );
-          elem.imageUrl = null;
+          if(preLoadedSites[elem.url]){
+            elem.imageUrl = preLoadedSites[elem.url];
+          }
+          else{
+            elem.imageUrl = null;
+          }
           apps.push(new AppModel(elem));
         });
 
@@ -52,7 +60,7 @@ define([
 
 
 
-      
+        
 
       // add the sidebar 
       var sidebarView = new SidebarView();
@@ -61,5 +69,5 @@ define([
     }
   });
 
-  return AppsView;
+return AppsView;
 });
