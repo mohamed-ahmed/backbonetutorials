@@ -1,4 +1,4 @@
-define([
+/*define([
   'underscore',
   'backbone',
 ], function(_, Backbone) {
@@ -27,3 +27,4 @@ define([
   	return OwnerModel;
 
 });
+*/

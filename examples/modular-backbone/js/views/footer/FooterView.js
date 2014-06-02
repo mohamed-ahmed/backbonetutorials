@@ -1,4 +1,4 @@
-define([
+/*define([
   'jquery',
   'underscore',
   'backbone',
@@ -40,3 +40,4 @@ define([
   return FooterView;
   
 });
+*/

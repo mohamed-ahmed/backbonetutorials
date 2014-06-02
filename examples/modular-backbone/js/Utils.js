@@ -57,9 +57,9 @@
 						}
 					}
 					else if((jqueryHTML[i]).nodeName == "META" ){
-						console.log("\n\n\nMETA\n\n\n")
+						console.log("META")
 						if(jqueryHTML[i].attributes["property"] && jqueryHTML[i].content){
-							console.log("\n\n\nproperty: ");
+							console.log("property: ");
 							console.log(jqueryHTML[i].attributes["property"]);
 							if(jqueryHTML[i].attributes["property"].value.indexOf("og:image") >= 0 ){
 								console.log("og:image found: ");
@@ -175,6 +175,17 @@
 
 		Utils.stripUrl = function(url){
 			return url.split("//")[1].split("/")[0];
+		}
+
+		Utils.save = function(key, value){
+			var keyValueObj = {};
+			keyValueObj[key] = value;
+			chrome.storage.local.set( keyValueObj, function() {
+				console.log("saving: ");
+				console.log(keyValueObj);
+				console.log(keyValueObj[key]);
+				console.log(' saved');
+			});
 		}
 
 

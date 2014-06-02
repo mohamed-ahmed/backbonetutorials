@@ -15,33 +15,34 @@ define([
 					}
 				});
 
-				if(!model.attributes.imageUrl){
-					Utils.getBestImageURL(this.attributes.url, function (imageUrl){
-						model.set({"imageUrl" : imageUrl });
-						console.log("AppModel: ")
-						console.log(model);
-						Utils.imgToDataURL(imageUrl, function(err, resultString){
-							console.log("base64 url: ");
-							console.log(resultString);
-							model.attributes.imageUrl = resultString;
-							save( Utils.stripUrl( model.attributes.url ), model.attributes);
-						});
-					} );
-				}
+				var key = Utils.stripUrl(model.attributes.url);
+				chrome.storage.local.get(key, function(value) {
+					//preLoadedSites[key] = value;
+					if(value[key]){
+						model.set( { "imageUrl" :  value[key].imageUrl } );
+					}
+					else if(!model.attributes.imageUrl){
+						Utils.getBestImageURL(model.attributes.url, function (imageUrl){
+							model.set({"imageUrl" : imageUrl });
+							console.log("AppModel: ")
+							console.log(model);
+							Utils.imgToDataURL(imageUrl, function(err, resultString){
+								console.log("base64 url: ");
+								console.log(resultString);
+								model.attributes.imageUrl = resultString;
+								Utils.save( Utils.stripUrl( model.attributes.url ), model.attributes);
+							});
+						} );
+					}
+
+
+					console.log("getting: " + key);
+					console.log(value[key]);
+					console.log(" loaded");
+				});
+
 				
-
-				function save(key, value){
-					var keyValueObj = {};
-					keyValueObj[key] = value;
-					chrome.storage.local.set( keyValueObj, function() {
-						console.log("saving: ");
-						console.log(keyValueObj);
-						console.log(keyValueObj[key]);
-						console.log(' saved');
-					});
-				}
-
-
+				
 			}
 
 			

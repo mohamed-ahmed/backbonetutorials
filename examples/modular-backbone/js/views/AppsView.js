@@ -10,7 +10,6 @@ define([
   'Utils'
   ], function($, _, Backbone, SidebarView, AppModel, AppsCollection, AppsListView, appsTemplate, Utils){
 
-    var preLoadedSites = {};
 
     var AppsView = Backbone.View.extend({
       el: $("#mostVisited_div"),
@@ -34,27 +33,28 @@ define([
 
 
         chrome.topSites.get(function(localTopSites){
+          console.log("got sites at: " + (new Date()).getTime());
           topSites = localTopSites;
-        //console.log("topSites: ");
-        //console.log(topSites);
-        topSites.forEach(function (elem){
-          //get("site")
-          get( Utils.stripUrl( elem.url) );
-          if(preLoadedSites[elem.url]){
-            elem.imageUrl = preLoadedSites[elem.url];
-          }
-          else{
+          //console.log("topSites: ");
+          //console.log(topSites);
+          topSites.forEach(function (elem){
+            //get("site")
+            //get( Utils.stripUrl( elem.url) );
+            //if(preLoadedSites[elem.url]){
+              //elem.imageUrl = preLoadedSites[elem.url];
+            //}
+            //else{
             elem.imageUrl = null;
-          }
-          apps.push(new AppModel(elem));
+            //}
+            apps.push(new AppModel(elem));
+          });
+
+          var appsCollection = new AppsCollection(apps);  
+          var appsListView = new AppsListView({ collection: appsCollection}); 
+          
+          appsListView.render(); 
+
         });
-
-        var appsCollection = new AppsCollection(apps);  
-        var appsListView = new AppsListView({ collection: appsCollection}); 
-        
-        appsListView.render(); 
-
-      });
 
 
 
