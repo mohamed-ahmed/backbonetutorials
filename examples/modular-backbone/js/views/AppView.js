@@ -29,6 +29,20 @@ define([
             }
           });
 
+          elem.find(".remove-app-icon").hover(
+            function(){
+              elem.attr({href : null });
+            },
+            function(){
+              elem.attr({href : model.attributes.url});
+            }
+          )
+
+          elem.find(".remove-app-icon").click(function(){
+            
+            console.log("clicked");
+          })
+
           //console.log("this.el: ");
           //console.log(this.el);
 

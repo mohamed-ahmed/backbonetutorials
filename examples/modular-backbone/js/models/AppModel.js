@@ -22,6 +22,7 @@ define([
 						model.set( { "imageUrl" :  value[key].imageUrl } );
 					}
 					else if(!model.attributes.imageUrl){
+						model.attributes.deleted = false;
 						Utils.getBestImageURL(model.attributes.url, function (imageUrl){
 							model.set({"imageUrl" : imageUrl });
 							console.log("AppModel: ")
