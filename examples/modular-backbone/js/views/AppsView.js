@@ -30,29 +30,37 @@ define([
           });
         }
 
-
+        var numSites;
+        var count = 0;
 
         chrome.topSites.get(function(localTopSites){
           console.log("got sites at: " + (new Date()).getTime());
           topSites = localTopSites;
-          //console.log("topSites: ");
-          //console.log(topSites);
+          numSites = localTopSites.length;
+          console.log("numSites: " + numSites);
+
           topSites.forEach(function (elem){
-            //get("site")
-            //get( Utils.stripUrl( elem.url) );
-            //if(preLoadedSites[elem.url]){
-              //elem.imageUrl = preLoadedSites[elem.url];
-            //}
-            //else{
             elem.imageUrl = null;
-            //}
-            apps.push(new AppModel(elem));
+            var key = Utils.stripUrl(elem.url);
+            chrome.storage.local.get(key, function(value) {
+              count++;
+              if(!value[key].deleted){
+                console.log(value[key]);
+                console.log(" not deleted");
+                apps.push(new AppModel(elem));
+              }
+              if(count == numSites){
+                console.log("count: ");
+                console.log(count);
+                var appsCollection = new AppsCollection(apps);  
+                var appsListView = new AppsListView({ collection: appsCollection}); 
+
+                appsListView.render(); 
+              }
+            });
           });
 
-          var appsCollection = new AppsCollection(apps);  
-          var appsListView = new AppsListView({ collection: appsCollection}); 
           
-          appsListView.render(); 
 
         });
 

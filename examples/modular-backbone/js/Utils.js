@@ -1,5 +1,5 @@
 
-/* Gets html from url
+/* Utility functions
  *
  */
 

@@ -2,8 +2,9 @@ define([
   'underscore',
   'backbone',
   'models/AppModel',
-  'text!templates/appTemplate.html'
-], function(_, Backbone, AppModel, appTemplate){    
+  'text!templates/appTemplate.html',
+  'Sync'
+], function(_, Backbone, AppModel, appTemplate, Sync){    
     
     console.log("app view called");
 
@@ -39,9 +40,13 @@ define([
           )
 
           elem.find(".remove-app-icon").click(function(){
-            
             console.log("clicked");
-          })
+            var options = {};
+            options.success = function(){
+              console.log("sucessful delete");
+            };
+            model.sync("delete", model, options);
+          });
 
           //console.log("this.el: ");
           //console.log(this.el);
