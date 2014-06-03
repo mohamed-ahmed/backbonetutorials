@@ -4,15 +4,15 @@ define([
   'models/AppModel',
   'text!templates/appTemplate.html',
   'Sync'
-], function(_, Backbone, AppModel, appTemplate, Sync){    
-    
+  ], function(_, Backbone, AppModel, appTemplate, Sync){    
+
     console.log("app view called");
 
     var AppView = Backbone.View.extend({
 
-        template : _.template(appTemplate),
+      template : _.template(appTemplate),
 
-        render : function() {
+      render : function() {
           //console.log("render called");
           //console.log("this.model: ");
           //console.log(this.model);
@@ -25,7 +25,7 @@ define([
 
           model.on("change", function(){
             if(model.hasChanged("imageUrl")){
-              console.log("\n\nimage url changed\n\n");
+              //console.log("\n\nimage url changed\n\n");
               elem.find("#icon-img").attr("src", model.get("imageUrl"));
             }
           });
@@ -37,28 +37,31 @@ define([
             function(){
               elem.attr({href : model.attributes.url});
             }
-          )
+            )
 
           elem.find(".remove-app-icon").click(function(){
-            console.log("clicked");
+            //console.log("clicked");
             var options = {};
             options.success = function(){
-              console.log("sucessful delete");
+              //console.log("sucessful delete");
             };
             model.sync("delete", model, options);
+            elem.hide(300, function(){ 
+              elem.remove(); 
+            })
           });
 
           //console.log("this.el: ");
           //console.log(this.el);
 
-          console.log(elem[0]);
+          //console.log(elem[0]);
           $("#mostVisited_div").append(elem);
 
           return this;
         }
         
-    });
+      });
 
-    return AppView;
+return AppView;
 
 }); 

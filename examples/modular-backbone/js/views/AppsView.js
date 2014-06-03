@@ -34,10 +34,10 @@ define([
         var count = 0;
 
         chrome.topSites.get(function(localTopSites){
-          console.log("got sites at: " + (new Date()).getTime());
+          //console.log("got sites at: " + (new Date()).getTime());
           topSites = localTopSites;
           numSites = localTopSites.length;
-          console.log("numSites: " + numSites);
+          //console.log("numSites: " + numSites);
 
           topSites.forEach(function (elem){
             elem.imageUrl = null;
@@ -46,8 +46,8 @@ define([
               count++;
               if(value[key]){
                 if(!value[key].deleted){
-                  console.log(value[key]);
-                  console.log(" not deleted");
+                  //console.log(value[key]);
+                  //console.log(" not deleted");
                   if(value[key].imageUrl){
                     elem = value[key];
                   }

@@ -24,7 +24,7 @@ define([
       console.log(data.apps);
 
       _.forEach(data.apps, function (elem){
-        console.log(elem.attributes);
+        //console.log(elem.attributes);
 
 
         var appView = new AppView({model:elem});

@@ -19,7 +19,7 @@
  			xhr.open("GET", url, true);
  			xhr.onreadystatechange = function(){
  				if (xhr.readyState == 4) {
- 					console.log("getting html for: " + url);
+ 					//console.log("getting html for: " + url);
 					// JSON.parse does not evaluate the attacker's scripts.
 					//var resp = JSON.parse(xhr.responseText);
 					//console.log(xhr.responseText);
@@ -47,8 +47,8 @@
 					if((jqueryHTML[i]).nodeName == "LINK" ){
 						if(jqueryHTML[i].rel && jqueryHTML[i].href){
 							if(jqueryHTML[i].rel.indexOf("touch-icon") >= 0 ){
-								console.log("has touch icon")
-								console.log(jqueryHTML[i].attributes["href"].value);
+								//console.log("has touch icon")
+								//console.log(jqueryHTML[i].attributes["href"].value);
 								imageURL =  jqueryHTML[i].attributes["href"].value;
 								imageURL = Utils.getFullImageURL(pageURL, imageURL);
 								break;
@@ -57,14 +57,14 @@
 						}
 					}
 					else if((jqueryHTML[i]).nodeName == "META" ){
-						console.log("META")
+						//console.log("META")
 						if(jqueryHTML[i].attributes["property"] && jqueryHTML[i].content){
-							console.log("property: ");
-							console.log(jqueryHTML[i].attributes["property"]);
+							//console.log("property: ");
+							//console.log(jqueryHTML[i].attributes["property"]);
 							if(jqueryHTML[i].attributes["property"].value.indexOf("og:image") >= 0 ){
-								console.log("og:image found: ");
-								console.log(jqueryHTML[i].content);
-								console.log(jqueryHTML[i]);
+								//console.log("og:image found: ");
+								//console.log(jqueryHTML[i].content);
+								//console.log(jqueryHTML[i]);
 								imageURL =  jqueryHTML[i].content;
 								imageURL = Utils.getFullImageURL(pageURL, imageURL);
 							}
@@ -73,7 +73,7 @@
 					}
 					else if( !imageURL && (jqueryHTML[i]).nodeName == "DIV" ){
 						imageURL = Utils.getFaviconUrl(pageURL);
-						console.log("reached a div")
+						//console.log("reached a div")
 						break;
 					}
 				}
@@ -81,15 +81,15 @@
 					imageURL = Utils.getFaviconUrl(pageURL);
 				}
 
-				console.log("getBestImageURL: ");
-				console.log(imageURL);
+				//console.log("getBestImageURL: ");
+				//console.log(imageURL);
 				Utils.tryImage(imageURL,
 					function(){				//success
-						console.log("sucess");
+						//console.log("sucess");
 						callback(imageURL);
 					},
 					function(){				//failure
-						console.log("failure");
+						//console.log("failure");
 						callback("imgs/browser-icon.png")
 					}
 
@@ -121,7 +121,7 @@
 		};
 
 		Utils.getFullImageURL = function (siteUrl, imagePath){
-			console.log("getting full path for:" + siteUrl + ", " + imagePath);
+			//console.log("getting full path for:" + siteUrl + ", " + imagePath);
 			var absUrl;
 
 			if(imagePath.indexOf("//") == 0){
@@ -143,7 +143,7 @@
 				absUrl = siteUrl + imagePath;
 			}
 
-			console.log("full path is:  " + absUrl);
+			//console.log("full path is:  " + absUrl);
 
 			return absUrl;
 		}
@@ -181,10 +181,10 @@
 			var keyValueObj = {};
 			keyValueObj[key] = value;
 			chrome.storage.local.set( keyValueObj, function() {
-				console.log("saving: ");
-				console.log(keyValueObj);
-				console.log(keyValueObj[key]);
-				console.log(' saved');
+				//console.log("saving: ");
+				//console.log(keyValueObj);
+				//console.log(keyValueObj[key]);
+				//console.log(' saved');
 			});
 		}
 
