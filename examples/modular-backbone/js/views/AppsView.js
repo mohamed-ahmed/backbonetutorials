@@ -44,9 +44,18 @@ define([
             var key = Utils.stripUrl(elem.url);
             chrome.storage.local.get(key, function(value) {
               count++;
-              if(!value[key].deleted){
-                console.log(value[key]);
-                console.log(" not deleted");
+              if(value[key]){
+                if(!value[key].deleted){
+                  console.log(value[key]);
+                  console.log(" not deleted");
+                  if(value[key].imageUrl){
+                    elem = value[key];
+                  }
+                  apps.push(new AppModel(elem));
+                }
+
+              }
+              else{
                 apps.push(new AppModel(elem));
               }
               if(count == numSites){
@@ -68,7 +77,7 @@ define([
 
 
 
-        
+
 
       // add the sidebar 
       var sidebarView = new SidebarView();
