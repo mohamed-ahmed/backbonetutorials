@@ -44,6 +44,7 @@ define([
 				});*/
 
 			if(!model.attributes.imageUrl){
+				console.log("no image");
 				model.attributes.deleted = false;
 				Utils.getBestImageURL(model.attributes.url, function (imageUrl){
 					model.set({"imageUrl" : imageUrl });
@@ -54,6 +55,9 @@ define([
 						//console.log(resultString);
 						model.attributes.imageUrl = resultString;
 						Utils.save( Utils.stripUrl( model.attributes.url ), model.attributes);
+						if(model.attributes.custom){
+							Utils.addToCollection("savedSites", model.attributes);
+						}
 					});
 				} );
 			}

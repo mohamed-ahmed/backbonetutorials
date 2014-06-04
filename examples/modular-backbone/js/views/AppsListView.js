@@ -23,6 +23,13 @@ define([
       console.log("apps: ");
       console.log(data.apps);
 
+      this.collection.on("add", function (app){
+        console.log(app);
+        console.log(" app added");
+        var appView = new AppView({model:app});
+        appView.render();
+      });
+
       _.forEach(data.apps, function (elem){
         //console.log(elem.attributes);
 

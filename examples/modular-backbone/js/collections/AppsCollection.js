@@ -10,6 +10,7 @@ define([
 
       initialize : function(models, options) {
         console.log("AppsCollection.js called");
+        console.log(this);
       },
       
       url : function() {

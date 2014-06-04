@@ -174,7 +174,10 @@
 		}
 
 		Utils.stripUrl = function(url){
-			return url.split("//")[1].split("/")[0];
+			if(url.indexOf("//") >=0 ){
+				return url.split("//")[1].split("/")[0];
+			}
+			else return url.split("/")[0];
 		}
 
 		Utils.save = function(key, value){
@@ -185,6 +188,17 @@
 				//console.log(keyValueObj);
 				//console.log(keyValueObj[key]);
 				//console.log(' saved');
+			});
+		}
+
+		Utils.addToCollection = function(key, newValue){
+			var collection;
+			chrome.storage.local.get(key, function(value){
+				collection = value[key];
+				collection.push(newValue);
+				Utils.save(key, collection, function(){
+					console.log("collection saved");
+				})
 			});
 		}
 
