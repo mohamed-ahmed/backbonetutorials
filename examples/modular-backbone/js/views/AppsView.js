@@ -32,6 +32,7 @@ define([
         }*/
 
         var _preLoadedSites = [];
+        var uniquePages = [];
         chrome.storage.local.get("savedSites", function(value){
           if(!value["savedSites"]){
             console.log("no saved sites");
@@ -73,11 +74,13 @@ define([
                       elem = value[key];
                     }
                     apps.push(new AppModel(elem));
+                    uniquePages.push( Utils.getUniquePage(elem.url) );
                   }
 
                 }
                 else{
                   apps.push(new AppModel(elem));
+                  uniquePages.push( Utils.getUniquePage(elem.url) );
                 }
                 if(count == numSites){
                   console.log("count: ");
@@ -103,18 +106,22 @@ define([
         var newTitle = $("#input-title").val();  
         var newUrl = $("#input-url").val();
         if(newTitle && newUrl){
-          if( newUrl.indexOf("http://")!=0 ){
-            newUrl = "http://" + newUrl;
+          var existingObj = [];
+          
+          if(uniquePages.indexOf(Utils.getUniquePage(newUrl)) < 0 ){
+            if( newUrl.indexOf("http://")!=0 ){
+              newUrl = "http://" + newUrl;
+            }
+            var newSiteObj = {
+              title : newTitle,
+              url : newUrl,
+              imageUrl : null,
+              deleted : false,
+              custom : true
+            };
+            var newApp = new AppModel(newSiteObj);
+            appsCollection.add(newApp);
           }
-          var newSiteObj = {
-            title : newTitle,
-            url : newUrl,
-            imageUrl : null,
-            deleted : false,
-            custom : true
-          };
-          var newApp = new AppModel(newSiteObj);
-          appsCollection.add(newApp);
         }      
       });    
 

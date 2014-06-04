@@ -10,6 +10,8 @@ define([
 			initialize: function(){
 				var model = this;
 
+				
+
 				model.on("change", function(){
 					if(model.hasChanged("imageUrl")){
 						//console.log("\n\nimage url changed\n\n");
@@ -54,7 +56,7 @@ define([
 						//console.log("base64 url: ");
 						//console.log(resultString);
 						model.attributes.imageUrl = resultString;
-						Utils.save( Utils.stripUrl( model.attributes.url ), model.attributes);
+						Utils.save( Utils.stripUrl( Utils.stripUrl (model.attributes.url ) ), model.attributes);
 						if(model.attributes.custom){
 							Utils.addToCollection("savedSites", model.attributes);
 						}

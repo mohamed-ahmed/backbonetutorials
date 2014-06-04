@@ -175,9 +175,9 @@
 
 		Utils.stripUrl = function(url){
 			if(url.indexOf("//") >=0 ){
-				return url.split("//")[1].split("/")[0];
+				return url.split("//")[1].split("/")[0].toLowerCase();
 			}
-			else return url.split("/")[0];
+			else return url.split("/")[0].toLowerCase();
 		}
 
 		Utils.save = function(key, value){
@@ -200,6 +200,25 @@
 					console.log("collection saved");
 				})
 			});
+		}
+
+		Utils.getUniquePage = function(url){
+			var uniqueUrl = url;
+			if(uniqueUrl.indexOf("https://") >=0 ){
+				uniqueUrl = uniqueUrl.split("https://")[1];
+			}
+			if(uniqueUrl.indexOf("http://") == 0 ){
+				uniqueUrl = uniqueUrl.split("http://")[1];
+			}
+			if(uniqueUrl.indexOf("www.") == 0 ){
+				uniqueUrl = uniqueUrl.split("www.")[1];
+			}
+
+			if(uniqueUrl[uniqueUrl.length-1] == "/"){
+				uniqueUrl = uniqueUrl.slice(0,uniqueUrl.length-1);
+			}
+			return uniqueUrl;
+
 		}
 
 
