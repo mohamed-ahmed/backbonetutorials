@@ -73,15 +73,9 @@ define([
 
         });
 
-
-
-
-
-
-
-      // add the sidebar 
-      var sidebarView = new SidebarView();
-      sidebarView.render();
+      $("#add-app-icon").click(function(){
+        $('#myModal').modal();
+      })      
 
     }
   });

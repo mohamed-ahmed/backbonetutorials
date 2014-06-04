@@ -1,4 +1,4 @@
-/*define([
+define([
   'jquery',
   'underscore',
   'backbone',
@@ -20,7 +20,6 @@
       }
 
       this.model = new OwnerModel(options);
-      this.model.fetch({ success : onDataHandler, dataType: "jsonp"});
 
     },
 
@@ -40,4 +39,3 @@
   return FooterView;
   
 });
-*/
