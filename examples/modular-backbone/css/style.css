@@ -286,10 +286,10 @@ h1{
     padding:0px;
     }*/
 
-    #icon{
-      width:16vh;
-      height:16vh;
-      border-radius: 2vh;
+#icon{
+  width:16vh;
+  height:16vh;
+  border-radius: 2vh;
   /*border: 1px solid;
   border-color: white;*/
   margin: 10px;
@@ -374,4 +374,26 @@ body{
 
 .remove-icon-wrapper:hover{
   color: gray;
+}
+
+#footer{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  height: 10mm;
+  width: 100mm;
+  background-color: rgba(155, 155, 155, 0.45);
+  border-top-left-radius: 5mm;
+}
+
+#add-app-icon{
+  border: solid;
+  border-radius: 2mm;
+  border-width: 1px;
+  font-size: 5mm;
+  margin-top: 1mm; 
+  margin-left: 5mm;
+  padding: 1mm;
+  padding-bottom: 1.5mm;
+  text-decoration: none;
 }
