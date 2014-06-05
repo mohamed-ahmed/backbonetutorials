@@ -3,8 +3,9 @@ define([
   'backbone',
   'models/AppModel',
   'text!templates/appTemplate.html',
-  'Sync'
-  ], function(_, Backbone, AppModel, appTemplate, Sync){    
+  'Sync',
+  'views/EditView'
+  ], function(_, Backbone, AppModel, appTemplate, Sync, EditView){    
 
     console.log("app view called");
 
@@ -41,14 +42,19 @@ define([
 
           elem.find(".remove-app-icon").click(function(){
             //console.log("clicked");
-            var options = {};
+            /*var options = {};
             options.success = function(){
               //console.log("sucessful delete");
             };
             model.sync("delete", model, options);
             elem.hide(300, function(){ 
               elem.remove(); 
-            })
+            })*/
+
+            console.log(model);
+            var editView = new EditView({model:model});
+            editView.render();
+
           });
 
           //console.log("this.el: ");

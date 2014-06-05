@@ -390,7 +390,7 @@ body{
   bottom: 0;
   right: 0;
   height: 10mm;
-  width: 100mm;
+  /*width: 25mm;*/
   background-color: rgba(155, 155, 155, 0.45);
   border-top-left-radius: 5mm;
 }
@@ -401,12 +401,16 @@ body{
   border-width: 1px;
   font-size: 5mm;
   margin-top: 1mm; 
-  margin-left: 5mm;
+  margin-left: 1mm;
   padding: 1mm;
   padding-bottom: 1.5mm;
   text-decoration: none;
 }
 
+#add-app-icon{
+  margin-left: 5mm;
+}
+
 #reload-icon{
-  margin-left: 1mm;
+  margin-right: 2mm;
 }
