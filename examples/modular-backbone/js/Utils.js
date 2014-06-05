@@ -53,6 +53,13 @@
 								imageURL = Utils.getFullImageURL(pageURL, imageURL);
 								break;
 							}
+
+							else if(jqueryHTML[i].rel.indexOf("shortcut icon") >= 0 ){
+								console.log("has shortcut icon")
+								//console.log(jqueryHTML[i].attributes["href"].value);
+								imageURL =  jqueryHTML[i].attributes["href"].value;
+								imageURL = Utils.getFullImageURL(pageURL, imageURL);
+							}
 							
 						}
 					}
@@ -71,6 +78,8 @@
 							
 						}
 					}
+
+
 					else if( !imageURL && (jqueryHTML[i]).nodeName == "DIV" ){
 						imageURL = Utils.getFaviconUrl(pageURL);
 						//console.log("reached a div")
@@ -114,7 +123,7 @@
 				faviconUrl = url.slice( 0, url.indexOf("/", 8)) + "/favicon.ico";
 			}
 			else{
-				faviconUrl = url + "favicon.ico";
+				faviconUrl = url + "/favicon.ico";
 			}
 
 			return faviconUrl;
