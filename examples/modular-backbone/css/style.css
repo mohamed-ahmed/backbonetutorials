@@ -386,7 +386,7 @@ body{
   border-top-left-radius: 5mm;
 }
 
-#add-app-icon{
+#add-app-icon, #reload-icon{
   border: solid;
   border-radius: 2mm;
   border-width: 1px;
@@ -396,4 +396,8 @@ body{
   padding: 1mm;
   padding-bottom: 1.5mm;
   text-decoration: none;
+}
+
+#reload-icon{
+  margin-left: 1mm;
 }

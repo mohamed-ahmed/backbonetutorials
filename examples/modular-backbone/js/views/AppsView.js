@@ -101,14 +101,29 @@ define([
         $('#myModal').modal();
       });
 
+
+      $("#reload-icon").click(function(){
+        chrome.topSites.get(function(localTopSites){
+          localTopSites.forEach(function (elem){
+            elem.imageUrl = null;
+            var existingObj;
+            existingObj = appsCollection.findWhere({ uniquePageUrl : Utils.getUniquePage(elem.url) });
+            if(  !existingObj ){
+              var newApp = new AppModel(elem);
+              appsCollection.push(newApp);
+            }
+          });
+        });
+      });
+
       //var prefixList = ["www.", "//www.", "http://www."]
       $("#save-new-site-button").click(function(){
         var newTitle = $("#input-title").val();  
         var newUrl = $("#input-url").val();
         if(newTitle && newUrl){
-          var existingObj = [];
-          
-          if(uniquePages.indexOf(Utils.getUniquePage(newUrl)) < 0 ){
+          var existingObj;
+          existingObj = appsCollection.findWhere({ uniquePageUrl : Utils.getUniquePage(newUrl) });
+          if(  !existingObj ){
             if( newUrl.indexOf("http://")!=0 ){
               newUrl = "http://" + newUrl;
             }

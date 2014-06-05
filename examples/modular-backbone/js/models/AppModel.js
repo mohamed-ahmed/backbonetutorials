@@ -10,7 +10,7 @@ define([
 			initialize: function(){
 				var model = this;
 
-				
+				model.attributes.uniquePageUrl = Utils.getUniquePage( model.attributes.url );
 
 				model.on("change", function(){
 					if(model.hasChanged("imageUrl")){

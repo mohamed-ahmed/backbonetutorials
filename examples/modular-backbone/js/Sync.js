@@ -16,6 +16,7 @@
  			switch(method){
  				case "delete":
 	 				console.log("model being destroyed");
+	 				model.collection.remove(model);
 	 				model.set( {deleted:true} );
 	 				Utils.save( Utils.stripUrl(model.get("url")),  model.attributes, function(){
 	 					console.log("model deleted")} );
