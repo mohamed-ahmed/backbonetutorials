@@ -1,0 +1,36 @@
+<div class="modal fade" id="editAppModal" tabindex="-1" role="dialog" aria-labelledby="editModal" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="editModal">Edit Site</h4>
+			</div>
+			<div class="modal-body">
+
+				<form class="form-horizontal" role="form">
+					<div class="form-group">
+						<label for="input-title" class="col-sm-2 control-label" >Title</label>
+						<div class="col-sm-10">
+							<input class="form-control" id="input-title"  value="<%=title%>" placeholder="Title">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="input-url" class="col-sm-2 control-label">URL</label>
+						<div class="col-sm-10">
+							<input class="form-control" id="input-url" value="<%=url%>" placeholder="URL">
+						</div>
+					</div>
+
+				</form>
+
+
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" id="edit-close-button" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary" data-dismiss="modal" id="save-site-button">Save changes</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal" id="delete-site-button">Delete</button>
+				<input type="file" name="file" id="file-input"/>
+			</div>
+		</div>
+	</div>
+</div>

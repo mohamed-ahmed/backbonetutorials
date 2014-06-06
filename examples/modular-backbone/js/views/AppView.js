@@ -14,9 +14,8 @@ define([
       template : _.template(appTemplate),
 
       render : function() {
-          //console.log("render called");
-          //console.log("this.model: ");
-          //console.log(this.model);
+
+
           this.$el.html(this.template(this.model.attributes));
           var model = this.model;
           var $el = this.$el;
@@ -24,11 +23,19 @@ define([
           var elem = this.$el.find("#icon");
 
 
+
           model.on("change", function(){
             if(model.hasChanged("imageUrl")){
               //console.log("\n\nimage url changed\n\n");
               elem.find("#icon-img").attr("src", model.get("imageUrl"));
             }
+          });
+
+          model.on("destroy", function(){
+            console.log("AppView: model being deleted");
+            elem.hide(300, function(){ 
+              elem.remove(); 
+            });
           });
 
           elem.find(".remove-app-icon").hover(
@@ -52,7 +59,7 @@ define([
             })*/
 
             console.log(model);
-            var editView = new EditView({model:model});
+            var editView = new EditView({model:model , el : $("#edit-app-placeholder") });
             editView.render();
 
           });

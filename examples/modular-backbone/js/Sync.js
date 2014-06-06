@@ -20,6 +20,7 @@
 	 				model.set( {deleted:true} );
 	 				Utils.save( Utils.stripUrl(model.get("url")),  model.attributes, function(){
 	 					console.log("model deleted")} );
+	 				model.destroy();
 	 				break;
  				default:
  			}
