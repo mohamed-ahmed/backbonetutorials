@@ -20,6 +20,8 @@ define([
 
         var topSites;
         var apps = [];
+        var appsCollection = new AppsCollection(apps);  
+
 
 
         /*function get(key){
@@ -32,7 +34,7 @@ define([
         }*/
 
         var _preLoadedSites = [];
-        var uniquePages = [];
+        //var uniquePages = [];
         chrome.storage.local.get("savedSites", function(value){
           if(!value["savedSites"]){
             console.log("no saved sites");
@@ -63,29 +65,32 @@ define([
 
             localTopSites.forEach(function (elem){
               elem.imageUrl = null;
-              var key = Utils.stripUrl(elem.url);
+              var key = Utils.getUniquePage(elem.url);
               chrome.storage.local.get(key, function(value) {
                 count++;
                 if(value[key]){
-                  if(!value[key].deleted){
+                  var existingObj;
+                  existingObj = appsCollection.findWhere({ uniquePageUrl : Utils.getUniquePage(elem.url) });
+                  if(!value[key].deleted && !existingObj ){
                     //console.log(value[key]);
                     //console.log(" not deleted");
                     if(value[key].imageUrl){
                       elem = value[key];
                     }
-                    apps.push(new AppModel(elem));
-                    uniquePages.push( Utils.getUniquePage(elem.url) );
+                    var newApp = new AppModel(elem);
+                    appsCollection.push(newApp);
+                    //uniquePages.push( Utils.getUniquePage(elem.url) );
                   }
 
                 }
                 else{
-                  apps.push(new AppModel(elem));
-                  uniquePages.push( Utils.getUniquePage(elem.url) );
+                  var newApp = new AppModel(elem);
+                  appsCollection.push(newApp);
+                  //uniquePages.push( Utils.getUniquePage(elem.url) );
                 }
                 if(count == numSites){
                   console.log("count: ");
                   console.log(count);
-                  appsCollection = new AppsCollection(apps);  
                   var appsListView = new AppsListView({ collection: appsCollection}); 
 
                   appsListView.render(); 

@@ -18,51 +18,27 @@ define([
 					}
 				});
 
-				var key = Utils.stripUrl(model.attributes.url);
-				/*chrome.storage.local.get(key, function(value) {
-					//preLoadedSites[key] = value;
-					if(value[key]){
-						model.set( { "imageUrl" :  value[key].imageUrl } );
-					}
-					else if(!model.attributes.imageUrl){
-						model.attributes.deleted = false;
-						Utils.getBestImageURL(model.attributes.url, function (imageUrl){
-							model.set({"imageUrl" : imageUrl });
-							console.log("AppModel: ")
-							console.log(model);
-							Utils.imgToDataURL(imageUrl, function(err, resultString){
-								console.log("base64 url: ");
-								console.log(resultString);
-								model.attributes.imageUrl = resultString;
-								Utils.save( Utils.stripUrl( model.attributes.url ), model.attributes);
-							});
-						} );
-					}
+				var key = Utils.getUniquePage(model.attributes.url);
 
 
-					console.log("getting: " + key);
-					console.log(value[key]);
-					console.log(" loaded");
-				});*/
-
-			if(!model.attributes.imageUrl){
-				console.log("no image");
-				model.attributes.deleted = false;
-				Utils.getBestImageURL(model.attributes.url, function (imageUrl){
-					model.set({"imageUrl" : imageUrl });
-					//console.log("AppModel: ")
-					//console.log(model);
-					Utils.imgToDataURL(imageUrl, function(err, resultString){
-						//console.log("base64 url: ");
-						//console.log(resultString);
-						model.attributes.imageUrl = resultString;
-						Utils.save( Utils.stripUrl( Utils.stripUrl (model.attributes.url ) ), model.attributes);
-						if(model.attributes.custom){
-							Utils.addToCollection("savedSites", model.attributes);
-						}
-					});
-				} );
-			}
+				if(!model.attributes.imageUrl){
+					console.log("no image");
+					model.attributes.deleted = false;
+					Utils.getBestImageURL(model.attributes.url, function (imageUrl){
+						model.set({"imageUrl" : imageUrl });
+						//console.log("AppModel: ")
+						//console.log(model);
+						Utils.imgToDataURL(imageUrl, function(err, resultString){
+							//console.log("base64 url: ");
+							//console.log(resultString);
+							model.attributes.imageUrl = resultString;
+							Utils.save(  Utils.getUniquePage (model.attributes.url ), model.attributes);
+							if(model.attributes.custom){
+								Utils.addToCollection("savedSites", model.attributes);
+							}
+						});
+					} );
+				}
 
 				
 				

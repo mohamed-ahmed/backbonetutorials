@@ -182,12 +182,12 @@
 			img.src = url;
 		}
 
-		Utils.stripUrl = function(url){
+		/*Utils.stripUrl = function(url){
 			if(url.indexOf("//") >=0 ){
 				return url.split("//")[1].split("/")[0].toLowerCase();
 			}
 			else return url.split("/")[0].toLowerCase();
-		}
+		}*/
 
 		Utils.save = function(key, value){
 			var keyValueObj = {};

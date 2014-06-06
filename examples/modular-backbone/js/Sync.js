@@ -18,10 +18,20 @@
 	 				console.log("model being destroyed");
 	 				model.collection.remove(model);
 	 				model.set( {deleted:true} );
-	 				Utils.save( Utils.stripUrl(model.get("url")),  model.attributes, function(){
+	 				Utils.save( Utils.getUniquePage(model.get("url")),  model.attributes, function(){
 	 					console.log("model deleted")} );
 	 				model.destroy();
 	 				break;
+
+	 			case "update":
+	 				console.log("model being updated");
+	 				//model.collection.remove(model);
+	 				model.set( {deleted:true} );
+	 				Utils.save( Utils.getUniquePage(model.get("url")),  model.attributes, function(){
+	 					console.log("model deleted")} );
+	 				model.destroy();
+	 				break;
+
  				default:
  			}
  		}
