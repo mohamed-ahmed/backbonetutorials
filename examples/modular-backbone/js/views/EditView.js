@@ -1,10 +1,11 @@
 define([
   'underscore',
   'backbone',
+  'dropzone',
   'models/AppModel',
   'text!templates/editModalTemplate.html',
   'Sync'
-  ], function(_, Backbone, AppModel, editModalTemplate, Sync){    
+  ], function(_, Backbone, AppModel, Dropzone, editModalTemplate, Sync){    
 
     console.log("edit view called");
 
@@ -62,9 +63,15 @@ define([
           //console.log(this.el);
 
           console.log(elem);
-          //$(elem).insertAfter('#myModal');
+          var  drop = $("#my-awesome-dropzone")
+          elem.find("#input-image").append(drop);
+          //drop.insertAfter(  elem.find(".form-horizontal")  ) 
+          elem.find("#my-awesome-dropzone").show();
+
+
 
           elem.modal();
+
 
 
           return this;

@@ -1,11 +1,12 @@
 define([
   'underscore',
   'backbone',
+  'dropzone',
   'models/AppModel',
   'text!templates/appTemplate.html',
   'Sync',
   'views/EditView'
-  ], function(_, Backbone, AppModel, appTemplate, Sync, EditView){    
+  ], function(_, Backbone, Dropzone, AppModel, appTemplate, Sync, EditView){    
 
     console.log("app view called");
 
@@ -22,6 +23,7 @@ define([
 
           var elem = this.$el.find("#icon");
 
+          //var myDropzone = new Dropzone("div#myId", { url: "/file/post"});
 
 
           model.on("change", function(){

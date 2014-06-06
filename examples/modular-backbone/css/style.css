@@ -414,3 +414,12 @@ body{
 #reload-icon{
   margin-right: 2mm;
 }
+
+#add-photo-dropzone{
+  height: 100px;
+}
+
+#my-awesome-dropzone{
+  display: none;
+  text-align: center;
+}
