@@ -29,6 +29,11 @@ define([
               //console.log("\n\nimage url changed\n\n");
               elem.find("#icon-img").attr("src", model.get("imageUrl"));
             }
+            if(model.hasChanged("title")){
+              console.log("\n\t title url changed\n\n");
+              elem.find("#url-text").text(model.get("title"));
+            }
+
           });
 
           model.on("destroy", function(){
@@ -38,7 +43,7 @@ define([
             });
           });
 
-          elem.find(".remove-app-icon").hover(
+          elem.find(".edit-app-icon").hover(
             function(){
               elem.attr({href : null });
             },
@@ -47,22 +52,15 @@ define([
             }
             )
 
-          elem.find(".remove-app-icon").click(function(){
-            //console.log("clicked");
-            /*var options = {};
-            options.success = function(){
-              //console.log("sucessful delete");
-            };
-            model.sync("delete", model, options);
-            elem.hide(300, function(){ 
-              elem.remove(); 
-            })*/
+          elem.find(".edit-app-icon").click(function(){
 
             console.log(model);
             var editView = new EditView({model:model , el : $("#edit-app-placeholder") });
             editView.render();
 
           });
+
+
 
           //console.log("this.el: ");
           //console.log(this.el);

@@ -17,7 +17,6 @@ define([
 						//console.log("\n\nimage url changed\n\n");
 					}
 				});
-
 				var key = Utils.getUniquePage(model.attributes.url);
 
 

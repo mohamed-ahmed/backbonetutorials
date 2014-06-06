@@ -25,14 +25,14 @@ define([
 
 
 
-          elem.find(".remove-app-icon").hover(
+          elem.find(".edit-app-icon").hover(
             function(){
               elem.attr({href : null });
             },
             function(){
               elem.attr({href : model.attributes.url});
             }
-          )
+            )
 
           elem.find("#delete-site-button").click(function(){
             //console.log("clicked");
@@ -42,6 +42,20 @@ define([
             };
             model.sync("delete", model, options);
             
+          });
+
+          elem.find("#save-site-button").click(function(){
+            //console.log("clicked");
+            var options = {};
+            options.success = function(){
+              //console.log("sucessful delete");
+            };
+            var newTitle = elem.find("#input-title").val();
+            if(newTitle.length > 0 ){
+              model.set("title", elem.find("#input-title").val());
+            }
+            /*model.set("url", elem.find("input-url").val());*/
+            model.sync("update", model, options);
           });
 
           //console.log("this.el: ");
