@@ -63,8 +63,9 @@ define([
           //console.log(this.el);
 
           console.log(elem);
-          var  drop = $("#my-awesome-dropzone")
+          var  drop = $("#my-awesome-dropzone").clone();
           elem.find("#input-image").append(drop);
+          drop.dropzone();
           //drop.insertAfter(  elem.find(".form-horizontal")  ) 
           elem.find("#my-awesome-dropzone").show();
 
