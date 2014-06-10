@@ -54,13 +54,13 @@ define([
             };
             var newTitle = elem.find("#input-title").val();
             if(newTitle.length > 0 ){
-              model.set("title", newTitle);
+              model.set( { title : newTitle });
             }
 
             var newImageUrl = elem.find("#input-image-url").val();
             if(newImageUrl.length > 0 ){
               Utils.imgToDataURL(newImageUrl, function(err, resultString){
-                model.set("imageUrl", resultString);
+                model.set({ imageUrl : resultString });
               });
             }
 
