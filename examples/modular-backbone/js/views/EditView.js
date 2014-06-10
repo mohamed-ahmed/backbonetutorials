@@ -54,9 +54,17 @@ define([
             };
             var newTitle = elem.find("#input-title").val();
             if(newTitle.length > 0 ){
-              model.set("title", elem.find("#input-title").val());
+              model.set("title", newTitle);
             }
-            if(thumbnailUrl){
+
+            var newImageUrl = elem.find("#input-image-url").val();
+            if(newImageUrl.length > 0 ){
+              Utils.imgToDataURL(newImageUrl, function(err, resultString){
+                model.set("imageUrl", resultString);
+              });
+            }
+
+            else if(thumbnailUrl){
               model.set( {imageUrl : thumbnailUrl} );
             }
 
