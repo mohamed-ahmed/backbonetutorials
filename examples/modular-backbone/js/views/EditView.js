@@ -75,6 +75,7 @@ define([
               url:"#", 
               maxFiles : 1,
               thumbnailWidth : 200,
+              thumbnailHeight : 200,
               init : function(){
                 this.on("thumbnail", function(file, dataUrl) { 
                   console.log("thumbnail loaded");
