@@ -8,6 +8,7 @@ define([
   ], function(_, Backbone, AppModel, Dropzone, editModalTemplate, Sync){    
 
     console.log("edit view called");
+    var thumbnailUrl;
 
     var EditView = Backbone.View.extend({
 
@@ -53,8 +54,20 @@ define([
             };
             var newTitle = elem.find("#input-title").val();
             if(newTitle.length > 0 ){
-              model.set("title", elem.find("#input-title").val());
+              model.set( { title : newTitle });
             }
+
+            var newImageUrl = elem.find("#input-image-url").val();
+            if(newImageUrl.length > 0 ){
+              Utils.imgToDataURL(newImageUrl, function(err, resultString){
+                model.set({ imageUrl : resultString });
+              });
+            }
+
+            else if(thumbnailUrl){
+              model.set( {imageUrl : thumbnailUrl} );
+            }
+
             /*model.set("url", elem.find("input-url").val());*/
             model.sync("update", model, options);
           });
@@ -65,7 +78,48 @@ define([
           console.log(elem);
           var  drop = $("#my-awesome-dropzone").clone();
           elem.find("#input-image").append(drop);
-          drop.dropzone();
+          drop.dropzone( 
+            {
+              url:"#", 
+              maxFiles : 1,
+              thumbnailWidth : 200,
+              thumbnailHeight : 200,
+              init : function(){
+                this.on("thumbnail", function(file, dataUrl) { 
+                  console.log("thumbnail loaded");
+                  console.log(dataUrl);
+                  thumbnailUrl = dataUrl;
+                  this.options.clickable = false;
+                });
+
+              }
+            }
+
+
+          );
+
+          //console.log(drop[0]);
+          // Now that the DOM is fully loaded, create the dropzone, and setup the
+          // event listeners
+          /*drop.on("drop", function() {
+            console.log("dropped");
+          });*/
+
+          $("#my-awesome-dropzone").ready(function(){
+            drop.on("thumbnail", function(dataUrl) {
+              console.log("processing");
+            });
+          });
+
+          /*drop.options.dictResponseError(function(file){
+            console.log("done");
+          });*/
+
+          //drop.options.method = null;
+
+
+
+
           //drop.insertAfter(  elem.find(".form-horizontal")  ) 
           elem.find("#my-awesome-dropzone").show();
 
