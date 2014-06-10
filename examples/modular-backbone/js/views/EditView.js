@@ -65,25 +65,42 @@ define([
           console.log(elem);
           var  drop = $("#my-awesome-dropzone").clone();
           elem.find("#input-image").append(drop);
-          drop.dropzone( {url:"#"} );
+          drop.dropzone( 
+            {
+              url:"#", 
+              maxFiles : 1,
+              init : function(){
+                this.on("thumbnail", function(file, dataUrl) { 
+                  console.log("thumbnail loaded");
+                  console.log(dataUrl);
+                });
 
-          $(function() {
+              }
+            }
 
-            //console.log(drop[0]);
-            // Now that the DOM is fully loaded, create the dropzone, and setup the
-            // event listeners
-            drop.on("processing", function(file) {
-              console.log("added files");
-              console.log(file);
+
+          );
+
+          //console.log(drop[0]);
+          // Now that the DOM is fully loaded, create the dropzone, and setup the
+          // event listeners
+          /*drop.on("drop", function() {
+            console.log("dropped");
+          });*/
+
+          $("#my-awesome-dropzone").ready(function(){
+            drop.on("thumbnail", function(dataUrl) {
+              console.log("processing");
             });
-
-            /*drop.options.dictResponseError(function(file){
-              console.log("done");
-            });*/
-
-            //drop.options.method = null;
-
           });
+
+          /*drop.options.dictResponseError(function(file){
+            console.log("done");
+          });*/
+
+          //drop.options.method = null;
+
+
 
 
           //drop.insertAfter(  elem.find(".form-horizontal")  ) 
