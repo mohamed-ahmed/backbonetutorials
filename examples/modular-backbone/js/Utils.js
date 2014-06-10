@@ -192,7 +192,7 @@
 		Utils.save = function(key, value){
 			var keyValueObj = {};
 			keyValueObj[key] = value;
-			chrome.storage.local.set( keyValueObj, function() {
+			chrome.storage.sync.set( keyValueObj, function() {
 				//console.log("saving: ");
 				//console.log(keyValueObj);
 				//console.log(keyValueObj[key]);
@@ -202,7 +202,7 @@
 
 		Utils.addToCollection = function(key, newValue){
 			var collection;
-			chrome.storage.local.get(key, function(value){
+			chrome.storage.sync.get(key, function(value){
 				collection = value[key];
 				collection.push(newValue);
 				Utils.save(key, collection, function(){

@@ -6,7 +6,7 @@ chrome.topSites.get(function(localTopSites){
 }); 
 
 function get(key){
-  chrome.storage.local.get(key, function(value) {
+  chrome.storage.sync.get(key, function(value) {
     preLoadedSites[key] = value;
     console.log("getting: " + key);
     console.log(value[key]);
