@@ -8,6 +8,7 @@ define([
   ], function(_, Backbone, AppModel, Dropzone, editModalTemplate, Sync){    
 
     console.log("edit view called");
+    var thumbnailUrl;
 
     var EditView = Backbone.View.extend({
 
@@ -55,6 +56,10 @@ define([
             if(newTitle.length > 0 ){
               model.set("title", elem.find("#input-title").val());
             }
+            if(thumbnailUrl){
+              model.set( {imageUrl : thumbnailUrl} );
+            }
+
             /*model.set("url", elem.find("input-url").val());*/
             model.sync("update", model, options);
           });
@@ -69,10 +74,13 @@ define([
             {
               url:"#", 
               maxFiles : 1,
+              thumbnailWidth : 200,
               init : function(){
                 this.on("thumbnail", function(file, dataUrl) { 
                   console.log("thumbnail loaded");
                   console.log(dataUrl);
+                  thumbnailUrl = dataUrl;
+                  this.options.clickable = false;
                 });
 
               }
