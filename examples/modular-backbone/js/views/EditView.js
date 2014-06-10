@@ -65,7 +65,27 @@ define([
           console.log(elem);
           var  drop = $("#my-awesome-dropzone").clone();
           elem.find("#input-image").append(drop);
-          drop.dropzone();
+          drop.dropzone( {url:"#"} );
+
+          $(function() {
+
+            //console.log(drop[0]);
+            // Now that the DOM is fully loaded, create the dropzone, and setup the
+            // event listeners
+            drop.on("processing", function(file) {
+              console.log("added files");
+              console.log(file);
+            });
+
+            /*drop.options.dictResponseError(function(file){
+              console.log("done");
+            });*/
+
+            //drop.options.method = null;
+
+          });
+
+
           //drop.insertAfter(  elem.find(".form-horizontal")  ) 
           elem.find("#my-awesome-dropzone").show();
 
