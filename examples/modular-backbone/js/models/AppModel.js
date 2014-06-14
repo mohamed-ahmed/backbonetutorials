@@ -31,9 +31,9 @@ define([
 							//console.log("base64 url: ");
 							//console.log(resultString);
 							model.attributes.imageUrl = resultString;
-							Utils.save(  Utils.getUniquePage (model.attributes.url ), model.attributes);
+							Utils.saveLocal(  Utils.getUniquePage (model.attributes.url ), model.attributes);
 							if(model.attributes.custom){
-								Utils.addToCollection("savedSites", model.attributes);
+								Utils.addToLocalCollection("savedSites", model.attributes);
 							}
 						});
 					} );
