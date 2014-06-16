@@ -106,6 +106,9 @@ define([
         $('#myModal').modal();
       });
 
+      $("#settings-icon").click(function(){
+        $('#settingsModal').modal();
+      });
 
       $("#reload-icon").click(function(){
         chrome.topSites.get(function(localTopSites){
