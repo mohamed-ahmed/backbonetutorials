@@ -161,14 +161,14 @@
 		Utils.imgToDataURL = function(url, callback, outputFormat, quality) {
 			var canvas = document.createElement('CANVAS'),
 				ctx = canvas.getContext('2d'),
-				img = new Image();
+				img = new Image(100,100);
 			img.crossOrigin = 'Anonymous';
 			img.onload = function() {
 				var dataURL;
-				canvas.height = img.height;
-				canvas.width = img.width;
+				canvas.height = 100;//img.height;
+				canvas.width = 100;//img.width;
 				try {
-					ctx.drawImage(img, 0, 0);
+					ctx.drawImage(img, 0, 0, width=100, height=100);
 					dataURL = canvas.toDataURL(outputFormat, quality);
 					callback(null, dataURL);
 				} catch (e) {
@@ -189,7 +189,18 @@
 			else return url.split("/")[0].toLowerCase();
 		}*/
 
-		Utils.save = function(key, value){
+		Utils.saveLocal = function(key, value){
+			var keyValueObj = {};
+			keyValueObj[key] = value;
+			chrome.storage.local.set( keyValueObj, function() {
+				//console.log("saving: ");
+				//console.log(keyValueObj);
+				//console.log(keyValueObj[key]);
+				//console.log(' saved');
+			});
+		}
+
+		Utils.saveSync = function(key, value){
 			var keyValueObj = {};
 			keyValueObj[key] = value;
 			chrome.storage.sync.set( keyValueObj, function() {
@@ -200,12 +211,23 @@
 			});
 		}
 
-		Utils.addToCollection = function(key, newValue){
+		Utils.addToLocalCollection = function(key, newValue){
 			var collection;
-			chrome.storage.sync.get(key, function(value){
+			chrome.storage.local.get(key, function(value){
 				collection = value[key];
 				collection.push(newValue);
-				Utils.save(key, collection, function(){
+				Utils.saveLocal(key, collection, function(){
+					console.log("collection saved");
+				})
+			});
+		}
+
+		Utils.addToSyncCollection = function(key, newValue){
+			var collection;
+			chrome.storage.local.get(key, function(value){
+				collection = value[key];
+				collection.push(newValue);
+				Utils.saveSyncl(key, collection, function(){
 					console.log("collection saved");
 				})
 			});

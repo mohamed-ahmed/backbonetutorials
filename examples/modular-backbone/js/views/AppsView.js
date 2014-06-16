@@ -25,7 +25,7 @@ define([
 
 
         /*function get(key){
-          chrome.storage.sync.get(key, function(value) {
+          chrome.storage.local.get(key, function(value) {
             preLoadedSites[key] = value;
             console.log("getting: " + key);
             console.log(value[key]);
@@ -35,11 +35,11 @@ define([
 
         var _preLoadedSites = [];
         //var uniquePages = [];
-        chrome.storage.sync.get("savedSites", function(value){
+        chrome.storage.local.get("savedSites", function(value){
           if(!value["savedSites"]){
             console.log("no saved sites");
             var collection = [];
-            Utils.save("savedSites", collection);
+            Utils.saveLocal("savedSites", collection);
           }
           else{
             _preLoadedSites = value["savedSites"];
@@ -66,7 +66,7 @@ define([
             localTopSites.forEach(function (elem){
               elem.imageUrl = null;
               var key = Utils.getUniquePage(elem.url);
-              chrome.storage.sync.get(key, function(value) {
+              chrome.storage.local.get(key, function(value) {
                 count++;
                 if(value[key]){
                   var existingObj;
@@ -106,6 +106,9 @@ define([
         $('#myModal').modal();
       });
 
+      $("#settings-icon").click(function(){
+        $('#settingsModal').modal();
+      });
 
       $("#reload-icon").click(function(){
         chrome.topSites.get(function(localTopSites){
