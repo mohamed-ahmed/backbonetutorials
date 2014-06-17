@@ -102,7 +102,7 @@
 						callback("imgs/browser-icon.png")
 					}
 
-				);
+					);
 
 			});
 
@@ -160,8 +160,8 @@
 
 		Utils.imgToDataURL = function(url, callback, outputFormat, quality) {
 			var canvas = document.createElement('CANVAS'),
-				ctx = canvas.getContext('2d'),
-				img = new Image(100,100);
+			ctx = canvas.getContext('2d'),
+			img = new Image(100,100);
 			img.crossOrigin = 'Anonymous';
 			img.onload = function() {
 				var dataURL;
@@ -211,23 +211,43 @@
 			});
 		}
 
-		Utils.addToLocalCollection = function(key, newValue){
+		Utils.addToLocalSiteCollection = function(key, newValue){
 			var collection;
+			var existingEntry = false;
 			chrome.storage.local.get(key, function(value){
 				collection = value[key];
-				collection.push(newValue);
+				console.log(collection);
+				_.each(collection, function(element,index,list){
+					if(element.uniqueUrl == key.uniqueUrl){
+						collection[index] = element;
+						existingEntry = true;
+					}
+				});
+				if(existingEntry == false){
+					collection.push(newValue);
+				}
 				Utils.saveLocal(key, collection, function(){
 					console.log("collection saved");
 				})
 			});
 		}
 
-		Utils.addToSyncCollection = function(key, newValue){
+		Utils.addToSyncSiteCollection = function(key, newValue){
 			var collection;
-			chrome.storage.local.get(key, function(value){
+			var existingEntry = false;
+			chrome.storage.sync.get(key, function(value){
 				collection = value[key];
-				collection.push(newValue);
-				Utils.saveSyncl(key, collection, function(){
+				console.log(collection);
+				_.each(collection, function(element,index,list){
+					if(element.uniqueUrl == key.uniqueUrl){
+						collection[index] = element;
+						existingEntry = true;
+					}
+				});
+				if(existingEntry == false){
+					collection.push(newValue);
+				}
+				Utils.saveSync(key, collection, function(){
 					console.log("collection saved");
 				})
 			});
@@ -248,11 +268,45 @@
 			if(uniqueUrl[uniqueUrl.length-1] == "/"){
 				uniqueUrl = uniqueUrl.slice(0,uniqueUrl.length-1);
 			}
+
+			uniqueUrl = uniqueUrl.toLowerCase();
+
 			return uniqueUrl;
 
 		}
 
-		Utils.saveLocalSitestoServer = function(){
+		/*Utils.saveLocalSitestoServer = function(appCollection){
+
+		}*/
+
+		Utils.saveLocalSitestoServer = function(appCollection){
+			var minimalArrayofSites = [];
+			var currentSiteObject;
+			_.each(appCollection.models, 
+				function(value, key, list){
+					console.log(value.attributes);
+					currentSiteObject = 
+					{ 
+						url : value.attributes.url,
+						title : value.attributes.url
+					};
+					if(value.attributes.customImage){
+						currentSiteObject.imageURL = value.attributes.imageURL;
+					}
+					minimalArrayofSites.push(currentSiteObject);
+					//push this list of sites to globally synced sites unique key
+				}
+				);
+
+		}
+
+		Utils.createLocalHash = function(){
+			//get sync id..timestamp
+			//verify it doesn't exist
+			//if it does..new timestamp
+
+			//save this hash locally as {hash : 100....}
+
 
 		}
 

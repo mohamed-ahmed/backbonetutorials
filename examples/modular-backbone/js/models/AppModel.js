@@ -33,7 +33,7 @@ define([
 							model.attributes.imageUrl = resultString;
 							Utils.saveLocal(  Utils.getUniquePage (model.attributes.url ), model.attributes);
 							if(model.attributes.custom){
-								Utils.addToLocalCollection("savedSites", model.attributes);
+								Utils.addToLocalSiteCollection("savedSites", model.attributes);
 							}
 						});
 					} );
