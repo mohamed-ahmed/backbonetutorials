@@ -55,6 +55,7 @@ define([
             var newTitle = elem.find("#input-title").val();
             if(newTitle.length > 0 ){
               model.set( { title : newTitle });
+              model.set( { customTitle : true } );
             }
 
             var newImageUrl = elem.find("#input-image-url").val();
@@ -66,6 +67,7 @@ define([
 
             else if(thumbnailUrl){
               model.set( {imageUrl : thumbnailUrl} );
+              model.set( { customImage : true } );
             }
 
             /*model.set("url", elem.find("input-url").val());*/
@@ -82,8 +84,8 @@ define([
             {
               url:"#", 
               maxFiles : 1,
-              thumbnailWidth : 200,
-              thumbnailHeight : 200,
+              thumbnailWidth : 100,
+              thumbnailHeight : 100,
               init : function(){
                 this.on("thumbnail", function(file, dataUrl) { 
                   console.log("thumbnail loaded");
