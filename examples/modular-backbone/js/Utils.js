@@ -201,13 +201,14 @@
 		}
 
 		Utils.saveSync = function(key, value){
+			console.log("saveSync called");
 			var keyValueObj = {};
 			keyValueObj[key] = value;
 			chrome.storage.sync.set( keyValueObj, function() {
-				//console.log("saving: ");
-				//console.log(keyValueObj);
-				//console.log(keyValueObj[key]);
-				//console.log(' saved');
+				console.log("saving: ");
+				console.log(keyValueObj);
+				console.log(keyValueObj[key]);
+				console.log(' saved');
 			});
 		}
 
@@ -301,13 +302,49 @@
 		}
 
 		Utils.createLocalHash = function(){
+			var localHash;
+			chrome.storage.local.get("localHash", function(value){
+				if(value["localHash"]){
+					localHash = value["localHash"];
+					console.log("localHash: " + localHash);
+				}
+				else{
+					localHash = (new Date()).getTime();
+					Utils.saveLocal("localHash", localHash);
+					chrome.storage.sync.get("hashList", function(localValue){
+						console.log("getting hashList");
+						var hashList;
+						if(localValue["hashList"]){
+							console.log( localValue["hashList"] );
+							hashList = localValue["hashList"]
+						}
+						else{
+							hashList = [];
+						}
+						hashList.push(localHash);
+						Utils.saveSync("hashList", hashList);
+
+					});
+				}
+				console.log(localHash);
+
+			});
+
 			//get sync id..timestamp
 			//verify it doesn't exist
 			//if it does..new timestamp
 
 			//save this hash locally as {hash : 100....}
 
+			//sync list of local hashes
 
+			//for every synced hash get the sites
+
+		}
+
+		Utils.getAndSaveSitesGlobally = function(){
+			//for every synced hash get the sites
+			//return hashmap of machine to sites 
 		}
 
 
