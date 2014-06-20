@@ -40,6 +40,8 @@
 
 		Utils.getBestImageURL = function(pageURL, callback){
 
+			var imageType;
+
 			this.getHTML(pageURL, function(jqueryHTML){
 
 				var imageURL;
@@ -51,6 +53,7 @@
 								//console.log(jqueryHTML[i].attributes["href"].value);
 								imageURL =  jqueryHTML[i].attributes["href"].value;
 								imageURL = Utils.getFullImageURL(pageURL, imageURL);
+								imageType = "touch-icon"
 								break;
 							}
 
@@ -59,13 +62,35 @@
 								//console.log(jqueryHTML[i].attributes["href"].value);
 								imageURL =  jqueryHTML[i].attributes["href"].value;
 								imageURL = Utils.getFullImageURL(pageURL, imageURL);
+								imageType = "shortcut icon";
 							}
 							
 						}
 					}
-					else if((jqueryHTML[i]).nodeName == "META" ){
+
+
+
+
+
+					else if( imageType != "touch-icon"  && (jqueryHTML[i]).nodeName == "META" ){
 						//console.log("META")
-						if(jqueryHTML[i].attributes["property"] && jqueryHTML[i].content){
+
+						/*if(jqueryHTML[i].attributes["name"] && jqueryHTML[i].attributes["content"]){
+							//console.log("property: ");
+							//console.log(jqueryHTML[i].attributes["property"]);
+							if(jqueryHTML[i].attributes["name"].value.indexOf("msapplication-TileImage") >= 0 ){
+								//console.log("og:image found: ");
+								//console.log(jqueryHTML[i].content);
+								//console.log(jqueryHTML[i]);
+								imageURL =  jqueryHTML[i].content;
+								imageURL = Utils.getFullImageURL(pageURL, imageURL);
+								imageType = "msapplication-TileImage";
+							}
+							
+						}*/
+
+
+						if(imageType != "msapplication-TileImage"  && jqueryHTML[i].attributes["property"] && jqueryHTML[i].content){
 							//console.log("property: ");
 							//console.log(jqueryHTML[i].attributes["property"]);
 							if(jqueryHTML[i].attributes["property"].value.indexOf("og:image") >= 0 ){
@@ -74,6 +99,7 @@
 								//console.log(jqueryHTML[i]);
 								imageURL =  jqueryHTML[i].content;
 								imageURL = Utils.getFullImageURL(pageURL, imageURL);
+								imageType = "og:image";
 							}
 							
 						}
@@ -82,8 +108,9 @@
 
 					else if( !imageURL && (jqueryHTML[i]).nodeName == "DIV" ){
 						imageURL = Utils.getFaviconUrl(pageURL);
+						imageType = "favicon";
 						//console.log("reached a div")
-						break;
+						//break;
 					}
 				}
 				if(!imageURL){
@@ -303,7 +330,7 @@
 		}
 
 		//TODO ADD CALLBACK
-		Utils.createLocalHash = function(){
+		Utils.getLocalHash = function(callback){
 			var localHash;
 			chrome.storage.local.get("localHash", function(value){
 				//if the hash exists locally..good, done
@@ -330,7 +357,7 @@
 						//add local hash to hashlist
 						hashList.push(localHash);
 						//save hashlist on server
-						Utils.saveSync("hashList", hashList);
+						Utils.saveSync("hashList", hashList, callback);
 
 					});
 				}
