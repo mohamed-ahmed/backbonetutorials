@@ -200,7 +200,7 @@
 			});
 		}
 
-		Utils.saveSync = function(key, value){
+		Utils.saveSync = function(key, value, callback){
 			console.log("saveSync called");
 			var keyValueObj = {};
 			keyValueObj[key] = value;
@@ -209,6 +209,7 @@
 				console.log(keyValueObj);
 				console.log(keyValueObj[key]);
 				console.log(' saved');
+				callback();
 			});
 		}
 
@@ -301,27 +302,34 @@
 
 		}
 
+		//TODO ADD CALLBACK
 		Utils.createLocalHash = function(){
 			var localHash;
 			chrome.storage.local.get("localHash", function(value){
+				//if the hash exists locally..good, done
 				if(value["localHash"]){
 					localHash = value["localHash"];
 					console.log("localHash: " + localHash);
 				}
+				//if the hash doesn't exist locally, create it
 				else{
 					localHash = (new Date()).getTime();
 					Utils.saveLocal("localHash", localHash);
 					chrome.storage.sync.get("hashList", function(localValue){
 						console.log("getting hashList");
 						var hashList;
+						//if the hashlist exists on the server, retrieve it
 						if(localValue["hashList"]){
 							console.log( localValue["hashList"] );
 							hashList = localValue["hashList"]
 						}
+						//if the hashlist doesn't exist on the server, create it
 						else{
 							hashList = [];
 						}
+						//add local hash to hashlist
 						hashList.push(localHash);
+						//save hashlist on server
 						Utils.saveSync("hashList", hashList);
 
 					});
