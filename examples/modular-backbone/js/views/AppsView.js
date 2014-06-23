@@ -132,12 +132,13 @@ define([
           var existingObj;
           existingObj = appsCollection.findWhere({ uniquePageUrl : Utils.getUniquePage(newUrl) });
           if(  !existingObj ){
-            if( newUrl.indexOf("http://")!=0 ){
+            /*if( newUrl.indexOf("http://")!=0 ){
               newUrl = "http://" + newUrl;
-            }
+            }*/
             var newSiteObj = {
               title : newTitle,
               url : newUrl,
+              uniquePageUrl : Utils.getUniquePage(newUrl),
               imageUrl : null,
               deleted : false,
               custom : true
