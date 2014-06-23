@@ -83,8 +83,13 @@
 
 
 			<form class="form-horizontal" role="form">
+
+				<!-- Sync settings -->
+
+				<p class="settings-label" >Sync</p>
+
 				<div class="form-group">
-					<label for="input-title" class="col-sm-9">Sync top sites across different computers</label>
+					<p for="input-title" class="col-sm-9">Sync top sites across different computers</p>
 					<!-- switch button -->
 					<div class="col-sm-3">
 						<div class="onoffswitch">
@@ -97,14 +102,39 @@
 					</div>
 				</div>
 
+			<!-- Edit page background settings -->
+
+				<div id="settings-margin"></div>
+				<hr>
+				<p class="settings-label" >Change background image</p>
+
+				<div class="form-group">
+					<p for="input-backround-image-url" class="col-sm-2 control-label" >Paste Image Url</p>
+					<div class="col-sm-10">
+						<input class="form-control" id="input-backround-image-url" placeholder="Image url">
+					</div>
+				</div>
+
+				<p id="or-text">Or</p>
+
+				<div class="form-group">
+					<p for="input-backround-image-url" class="col-sm-2 control-label">Drag and Drop/Upload</p>
+					<div class="col-sm-10">
+						<div  id="input-background-image"> </div>
+					</div>
+				</div> 
+
+
 			</form>
+
+
+
 
 
 
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	        <button type="button" class="btn btn-primary" data-dismiss="modal" id="save-new-site-button">Add page</button>
 	      </div>
 	    </div>
 	  </div>

@@ -100,12 +100,7 @@ define([
 
           );
 
-          //console.log(drop[0]);
-          // Now that the DOM is fully loaded, create the dropzone, and setup the
-          // event listeners
-          /*drop.on("drop", function() {
-            console.log("dropped");
-          });*/
+
 
           $("#my-awesome-dropzone").ready(function(){
             drop.on("thumbnail", function(dataUrl) {

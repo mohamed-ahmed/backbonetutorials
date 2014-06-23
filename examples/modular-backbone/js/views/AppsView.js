@@ -106,8 +106,45 @@ define([
         $('#myModal').modal();
       });
 
+      var elem = $("#settingsModal");
+
       $("#settings-icon").click(function(){
         $('#settingsModal').modal();
+        
+        var  drop = $("#my-awesome-dropzone").clone();
+        $("#input-background-image").append(drop);
+        drop.dropzone( 
+          {
+            url:"#", 
+            maxFiles : 1,
+            thumbnailWidth : 100,
+            thumbnailHeight : 100,
+            init : function(){
+              this.on("thumbnail", function(file, dataUrl) { 
+                console.log("thumbnail loaded");
+                console.log(dataUrl);
+                thumbnailUrl = dataUrl;
+                this.options.clickable = false;
+              });
+
+            }
+          }
+
+
+        );
+
+        elem.find("#my-awesome-dropzone").show();
+
+
+
+
+        $("#my-awesome-dropzone").ready(function(){
+          drop.on("thumbnail", function(dataUrl) {
+            console.log("processing");
+          });
+        });
+
+
       });
 
       $("#reload-icon").click(function(){

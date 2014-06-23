@@ -190,3 +190,17 @@ body{
 .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
     right: 0px; 
 }
+
+/*label{
+  font-weight: normal !important;
+}*/
+
+#settings-margin{
+  margin-top: 30px;
+}
+
+.settings-label{
+  font-weight: bold;
+  margin-top: 15px;
+  margin-bottom: 25px;
+}
