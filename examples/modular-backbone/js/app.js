@@ -1,4 +1,7 @@
-
+chrome.storage.local.get("background", function(object){
+  var bgImageUrl = object["background"];
+  document.body.style.backgroundImage = "url(" + bgImageUrl + " )"
+});
 
 console.log("app started " + (new Date()).getTime() );
 
