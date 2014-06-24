@@ -127,6 +127,12 @@ define([
                 this.options.clickable = false;
               });
 
+              this.on("success", function(file) { 
+                console.log("image loadeded successfully");
+                console.log(file);
+                this.options.clickable = false;
+              });
+
             }
           }
 
