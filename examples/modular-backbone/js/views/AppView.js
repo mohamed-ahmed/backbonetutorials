@@ -4,9 +4,9 @@ define([
   'dropzone',
   'models/AppModel',
   'text!templates/appTemplate.html',
-  'Sync',
+  'AppSync',
   'views/EditView'
-  ], function(_, Backbone, Dropzone, AppModel, appTemplate, Sync, EditView){    
+  ], function(_, Backbone, Dropzone, AppModel, appTemplate, AppSync, EditView){    
 
     console.log("app view called");
 

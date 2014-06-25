@@ -2,8 +2,8 @@ define([
 	'underscore',
 	'backbone',
 	'Utils',
-	'Sync'
-	], function(_, Backbone, Utils, Sync) {
+	'AppSync'
+	], function(_, Backbone, Utils, AppSync) {
 
 		var AppModel = Backbone.Model.extend({
 
@@ -43,7 +43,7 @@ define([
 				
 			},
 
-			sync : Sync.sync
+			sync : AppSync.sync
 
 			
 

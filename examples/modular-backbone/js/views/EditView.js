@@ -4,8 +4,8 @@ define([
   'dropzone',
   'models/AppModel',
   'text!templates/editModalTemplate.html',
-  'Sync'
-  ], function(_, Backbone, AppModel, Dropzone, editModalTemplate, Sync){    
+  'AppSync'
+  ], function(_, Backbone, AppModel, Dropzone, editModalTemplate, AppSync){    
 
     console.log("edit view called");
     var thumbnailUrl;

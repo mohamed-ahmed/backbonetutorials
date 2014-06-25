@@ -10,9 +10,9 @@
  	'Utils'
  	], function(_, Backbone, Utils) {
 
- 		Sync = {};
+ 		AppSync = {};
 
- 		Sync.sync = function(method, model, options){
+ 		AppSync.sync = function(method, model, options){
  			switch(method){
  				case "delete":
 	 				console.log("model being destroyed");
@@ -39,7 +39,7 @@
 
 
 
-		return Sync;
+		return AppSync;
 
 	});
 
