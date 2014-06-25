@@ -1,7 +1,7 @@
 chrome.storage.local.get("background", function(object){
   var bgImageUrl = object["background"];
   //document.body.style.backgroundImage = "url(" + bgImageUrl + " )";
-  $("#page-background").css("background-image",  bgImageUrl );
+  $("#page-background").css("background-image",  "url(" + bgImageUrl + " )" );
 });
 
 console.log("app started " + (new Date()).getTime() );
