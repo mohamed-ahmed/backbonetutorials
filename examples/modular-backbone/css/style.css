@@ -43,10 +43,12 @@ body{
   -ms-filter: blur(5px);
   filter: blur(5px);
   position : fixed;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  width: 100vw;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+/*  height: 100vh;
+  width: 100vw;*/
   background-size: cover;
   background-repeat: no-repeat;
 
@@ -131,6 +133,8 @@ body{
   padding-right: 1mm;
 }
 
+
+
 .tool-bar-icon{
   border: solid;
   border-radius: 2mm;
@@ -141,6 +145,12 @@ body{
   padding: 1mm;
   padding-bottom: 1.5mm;
   text-decoration: none;
+  color:white;
+}
+
+.tool-bar-icon:hover{
+  text-decoration: none;
+  color: #9BD1FF;
 }
 
 #add-app-icon{
