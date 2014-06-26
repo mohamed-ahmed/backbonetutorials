@@ -12,9 +12,11 @@ define([
 
 
 				model.on("change", function(){
-
+					console.log("background model has changed");
+					if(model.hasChanged("url")){
+						model.sync("update", model);
+					}
 				});
-				var key = Utils.getUniquePage(model.attributes.url);
 
 
 

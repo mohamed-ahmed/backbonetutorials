@@ -4,11 +4,13 @@ define([
   'backbone',
   'views/sidebar/SidebarView',
   'models/AppModel',
+  'models/BackgroundModel',
   'collections/AppsCollection',
   'views/AppsListView',
+  'views/BackgroundView',
   'text!templates/appsTemplate.html',
   'Utils'
-  ], function($, _, Backbone, SidebarView, AppModel, AppsCollection, AppsListView, appsTemplate, Utils){
+  ], function($, _, Backbone, SidebarView, AppModel, BackgroundModel, AppsCollection, AppsListView, BackgroundView, appsTemplate, Utils){
 
     var appsCollection;
     var AppsView = Backbone.View.extend({
@@ -150,6 +152,14 @@ define([
           });
         });
 
+        $("#settings-close-button").click(function(){
+          var backgroundImageUrl = $("#input-backround-image-url").val()
+          if(backgroundImageUrl.length > 0){
+            backgroundModel.set("url", backgroundImageUrl);
+          }
+          elem.find("#my-awesome-dropzone").remove();
+        });
+
 
       });
 
@@ -190,7 +200,14 @@ define([
             appsCollection.add(newApp);
           }
         }      
-      });    
+      });
+
+
+      var currentBackground = { url : $("#page-background").css("background-image").split("url(")[1].split(")")[0] };
+      var backgroundModel = new BackgroundModel( currentBackground );
+      console.log(backgroundModel);
+      var backgroundView = new BackgroundView({model : backgroundModel});
+      backgroundView.render();
 
     }
   });

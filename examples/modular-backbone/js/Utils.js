@@ -209,6 +209,31 @@
 			img.src = url;
 		}
 
+		Utils.backgroundImgToDataURL = function(url, callback, outputFormat, quality) {
+			var canvas = document.createElement('CANVAS'),
+			ctx = canvas.getContext('2d'),
+			img = new Image();
+			img.crossOrigin = 'Anonymous';
+			img.onload = function() {
+				console.log("image loaded");
+				var dataURL;
+				canvas.height = img.height;
+				canvas.width = img.width;
+				try {
+					ctx.drawImage(img, 0, 0, width = canvas.width , height=canvas.height);
+					dataURL = canvas.toDataURL(outputFormat = "image/jpeg", 0.5);
+					callback(null, dataURL);
+				} catch (e) {
+					callback(e, null);
+				}
+				canvas = img = null;
+			};
+			img.onerror = function() {
+				callback(new Error('Could not load image'), null);
+			};
+			img.src = url;
+		}
+
 		/*Utils.stripUrl = function(url){
 			if(url.indexOf("//") >=0 ){
 				return url.split("//")[1].split("/")[0].toLowerCase();
@@ -223,7 +248,7 @@
 				//console.log("saving: ");
 				//console.log(keyValueObj);
 				//console.log(keyValueObj[key]);
-				//console.log(' saved');
+				console.log(' saved');
 			});
 		}
 
