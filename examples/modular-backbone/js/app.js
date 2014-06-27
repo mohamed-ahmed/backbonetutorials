@@ -8,10 +8,15 @@ chrome.storage.local.get("background", function(object){
 
 $("#page-background").css("background-image",  "url(" + bgImageUrl + " )" );*/
 
-console.log("app started " + (new Date()).getTime() );
+var started = (new Date()).getTime();
+console.log("app started " + started );
+
+var timeGotSites;
 
 chrome.topSites.get(function(localTopSites){
-  console.log("got top sites at: " + (new Date()).getTime());
+  timeGotSites = (new Date()).getTime();
+  console.log("got top sites at: " + timeGotSites );
+  console.log("took: " + (timeGotSites-started) + " miliseconds");
 }); 
 
 
@@ -24,8 +29,15 @@ define([
   'underscore', 
   'backbone',
   'router', // Request router.js
-  ], function($, bootstrap, _, Backbone, Router){
+  'views/AppsView'
+  ], function($, bootstrap, _, Backbone, Router, AppsView){
     var initialize = function(){
+
+    timeAppjsStarted = (new Date()).getTime();
+    console.log("timeAppjsStarted took: " + (timeAppjsStarted-started) + " miliseconds");
+
+    var appsView = new AppsView();
+    appsView.render();
     // Pass in our Router module and call it's initialize function
     Router.initialize();
   };

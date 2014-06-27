@@ -7,7 +7,7 @@ define([
   'views/EditView'
   ], function(_, Backbone, AppModel, appTemplate, AppSync, EditView){    
 
-    console.log("app view called");
+    console.log("background view called");
 
     var BackgroundView = Backbone.View.extend({
 

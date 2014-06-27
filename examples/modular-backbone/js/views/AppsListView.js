@@ -14,6 +14,13 @@ define([
     el: $("#apps-list"),
 
     render: function(){
+
+
+      var appRenderTime = (new Date()).getTime();
+
+      console.log("apps rendered at: " + appRenderTime);
+
+      console.log("took: " + (appRenderTime-started) + " miliseconds");
       
       var data = {
         apps: this.collection.models,

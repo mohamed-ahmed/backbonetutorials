@@ -16,13 +16,23 @@ define([
     var AppsView = Backbone.View.extend({
       el: $("#mostVisited_div"),
       render: function(){
+
+
+        var appViewStartedTime = (new Date()).getTime();
+
+        console.log("appsView called at: " + appViewStartedTime );
+        console.log("took: " + (appViewStartedTime-started) + " miliseconds");
+
+
         $('.menu li').removeClass('active');
         $('.menu li a[href="'+window.location.hash+'"]').parent().addClass('active');
         this.$el.html(appsTemplate);
 
         var topSites;
         var apps = [];
-        var appsCollection = new AppsCollection(apps);  
+        var appsCollection = new AppsCollection(apps);
+        var appsListView = new AppsListView({ collection: appsCollection}); 
+        appsListView.render();   
 
 
 
@@ -93,9 +103,8 @@ define([
                 if(count == numSites){
                   console.log("count: ");
                   console.log(count);
-                  var appsListView = new AppsListView({ collection: appsCollection}); 
-
-                  appsListView.render(); 
+                  /*var appsListView = new AppsListView({ collection: appsCollection}); 
+                  appsListView.render(); */
                 }
               });
             });
