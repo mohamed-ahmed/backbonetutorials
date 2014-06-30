@@ -20,8 +20,9 @@
 
 			case "update":
 			console.log("model being updated");
-			Utils.saveLocal( "settings",  model.attributes, function(){
-				console.log("model saved")} );
+			/*Utils.saveLocal( "settings",  model.attributes, function(){
+				console.log("model saved")} );*/
+ 			model.attributes.backgroundModel.sync("update", model.attributes.backgroundModel);
 			break;
 
 			default:

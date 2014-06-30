@@ -31,8 +31,9 @@ define([
         console.log("SettingsView: ");
         console.log(model);
 
-        var currentBackground = { url : $("#page-background").css("background-image").split("url(")[1].split(")")[0] };
+        var currentBackground = { url : $("#page-background").css("background-image").split("url(")[1].split(")")[0], type : "null" };
         var backgroundModel = new BackgroundModel( currentBackground );
+        this.backgroundModel = backgroundModel;
         console.log(backgroundModel);
         var backgroundView = new BackgroundView({model : backgroundModel});
         backgroundView.render();

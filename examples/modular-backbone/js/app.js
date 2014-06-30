@@ -1,7 +1,22 @@
 chrome.storage.local.get("background", function(object){
-  var bgImageUrl = object["background"];
+  var bgImage = object["background"];
   //document.body.style.backgroundImage = "url(" + bgImageUrl + " )";
-  $("#page-background").css("background-image",  "url(" + bgImageUrl + " )" );
+  $("#page-background").css("background-image",  "url(" + bgImage.url + " )" );
+
+  if(bgImage.type == "image"){
+    $("#page-background").css("background-repeat", "no-repeat");
+    $("#page-background").css("background-attachment", "fixed");
+    $("#page-background").css("background-position", "center");
+  }
+  if(bgImage.type == "tile"){
+    console.log("background type = tile");
+    $("#page-background").css("background-repeat", "repeat");
+    $("#page-background").css("background-attachment", "none");
+    $("#page-background").css("background-position", "initial");
+    $("#page-background").css("background-size", "initial");
+    $("#page-background").css("-webkit-filter", "initial");
+  }
+
 });
 
 /*var bgImageUrl = readCookie("background");

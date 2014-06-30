@@ -20,7 +20,7 @@
 
 	 			case "update":
 	 				console.log("model being updated");
-	 				Utils.saveLocal( "background",  model.attributes.url, function(){
+	 				Utils.saveLocal( "background",  model.attributes, function(){
 	 					console.log("model saved")} );
 	 				break;
 

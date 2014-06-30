@@ -21,7 +21,7 @@ define([
           var model = this.model;
           var $el = this.$el;
 
-          var elem = this.$el.find("#icon");
+          var elem = this.$el.find(".myIcon");
 
           //var myDropzone = new Dropzone("div#myId", { url: "/file/post"});
 
@@ -33,7 +33,7 @@ define([
             }
             if(model.hasChanged("title")){
               console.log("\n\t title url changed\n\n");
-              elem.find("#url-text").text(model.get("title"));
+              elem.find(".url-text").text(model.get("title"));
             }
 
           });
