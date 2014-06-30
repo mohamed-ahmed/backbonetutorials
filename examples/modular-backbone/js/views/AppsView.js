@@ -107,7 +107,11 @@ define([
 
       
       var settingsModel = new SettingsModel();
-      var settingsView = new SettingsView( { model : settingsModel, el : $("#settingsModal" ) } );
+      var settingsViewOptions = {
+        model : settingsModel, 
+        el : $("#settingsModal")
+      };
+      var settingsView = new SettingsView( settingsViewOptions );
       settingsView.render();
 
       $("#settings-icon").click(function(){

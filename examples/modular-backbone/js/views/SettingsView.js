@@ -39,11 +39,17 @@ define([
 
         $el.on('hidden.bs.modal', function(){
           console.log("modal closed");
-          var backgroundImageUrl = $("#input-backround-image-url").val()
+          var backgroundImageUrl = $("#input-backround-image-url").val();
+          var backgroundTileUrl = $("#input-backround-tile-url").val();
           if(backgroundImageUrl.length > 0){
             backgroundModel.set("url", backgroundImageUrl);
             backgroundModel.set("type", "image");
           }
+          else if(backgroundTileUrl.length > 0){
+            backgroundModel.set("url", backgroundTileUrl);
+            backgroundModel.set("type", "tile");
+          }
+
         });
 
         var elem = $("#settingsModal");
