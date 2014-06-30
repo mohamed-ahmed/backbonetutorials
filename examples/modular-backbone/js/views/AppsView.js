@@ -5,12 +5,14 @@ define([
   'views/sidebar/SidebarView',
   'models/AppModel',
   'models/BackgroundModel',
+  'models/SettingsModel',
   'collections/AppsCollection',
   'views/AppsListView',
   'views/BackgroundView',
+  'views/SettingsView',
   'text!templates/appsTemplate.html',
   'Utils'
-  ], function($, _, Backbone, SidebarView, AppModel, BackgroundModel, AppsCollection, AppsListView, BackgroundView, appsTemplate, Utils){
+  ], function($, _, Backbone, SidebarView, AppModel, BackgroundModel, SettingsModel, AppsCollection, AppsListView, BackgroundView, SettingsView, appsTemplate, Utils){
 
     var appsCollection;
     var AppsView = Backbone.View.extend({
@@ -24,8 +26,6 @@ define([
         console.log("took: " + (appViewStartedTime-started) + " miliseconds");
 
 
-        $('.menu li').removeClass('active');
-        $('.menu li a[href="'+window.location.hash+'"]').parent().addClass('active');
         this.$el.html(appsTemplate);
 
         var topSites;
@@ -36,14 +36,6 @@ define([
 
 
 
-        /*function get(key){
-          chrome.storage.local.get(key, function(value) {
-            preLoadedSites[key] = value;
-            console.log("getting: " + key);
-            console.log(value[key]);
-            console.log(" loaded");
-          });
-        }*/
 
         var _preLoadedSites = [];
         //var uniquePages = [];
@@ -113,64 +105,15 @@ define([
 
         });
 
+      
+      var settingsModel = new SettingsModel( {el : $("#settingsModal" ) } );
+
+
       $("#add-app-icon").click(function(){
         $('#myModal').modal();
       });
 
-      var elem = $("#settingsModal");
 
-      $("#settings-icon").click(function(){
-        $('#settingsModal').modal();
-        
-        var  drop = $("#my-awesome-dropzone").clone();
-        $("#input-background-image").append(drop);
-        drop.dropzone( 
-          {
-            url:"#", 
-            maxFiles : 1,
-            thumbnailWidth : 100,
-            thumbnailHeight : 100,
-            init : function(){
-              this.on("thumbnail", function(file, dataUrl) { 
-                console.log("thumbnail loaded");
-                console.log(dataUrl);
-                thumbnailUrl = dataUrl;
-                this.options.clickable = false;
-              });
-
-              this.on("success", function(file) { 
-                console.log("image loadeded successfully");
-                console.log(file);
-                this.options.clickable = false;
-              });
-
-            }
-          }
-
-
-        );
-
-        elem.find("#my-awesome-dropzone").show();
-
-
-
-
-        $("#my-awesome-dropzone").ready(function(){
-          drop.on("thumbnail", function(dataUrl) {
-            console.log("processing");
-          });
-        });
-
-        $("#settings-close-button").click(function(){
-          var backgroundImageUrl = $("#input-backround-image-url").val()
-          if(backgroundImageUrl.length > 0){
-            backgroundModel.set("url", backgroundImageUrl);
-          }
-          elem.find("#my-awesome-dropzone").remove();
-        });
-
-
-      });
 
       $("#reload-icon").click(function(){
         chrome.topSites.get(function(localTopSites){

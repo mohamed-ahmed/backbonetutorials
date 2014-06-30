@@ -1,5 +1,5 @@
 
-/* For AppModel to override Backbone.sync
+/* For BackgroundModel to override Backbone.sync
  *
  */
 
