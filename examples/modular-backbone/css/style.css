@@ -11,6 +11,8 @@
   background-color: rgba(255, 255, 255, 0.23);
   color:black;
   text-decoration: none;
+  padding-left: 0px !important;
+  padding-right: 0px !important;
 }
 
 .myIcon:hover{
@@ -58,13 +60,14 @@ body{
   font-size: 2vh;
   /*max-width: 168px;*/
   word-wrap: break-word;
-  /*display: inline-block;*/
+  display: inline-block;
   margin-top: 1vh;
   width: 14vh;
   max-height: 5vh;
   text-align:center; 
   vertical-align: middle;
   overflow: hidden;
+  margin-right: 0px !important;
 
 }
 

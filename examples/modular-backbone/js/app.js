@@ -15,6 +15,14 @@ chrome.storage.local.get("background", function(object){
     $("#page-background").css("background-position", "initial");
     $("#page-background").css("background-size", "initial");
     $("#page-background").css("-webkit-filter", "initial");
+    $(".myIcon").ready(function(){
+        $(".myIcon").blurjs({
+        source: '#page-background',
+        radius: 7,
+        draggable : true,
+        overlay: 'rgba(255,255,255,0.4)'
+      });
+    });
   }
 
 });
