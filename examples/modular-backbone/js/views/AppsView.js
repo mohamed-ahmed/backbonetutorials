@@ -106,7 +106,13 @@ define([
         });
 
       
-      var settingsModel = new SettingsModel( {el : $("#settingsModal" ) } );
+      var settingsModel = new SettingsModel();
+      var settingsView = new SettingsView( { model : settingsModel, el : $("#settingsModal" ) } );
+      settingsView.render();
+
+      $("#settings-icon").click(function(){
+        settingsView.modal();
+      });
 
 
       $("#add-app-icon").click(function(){

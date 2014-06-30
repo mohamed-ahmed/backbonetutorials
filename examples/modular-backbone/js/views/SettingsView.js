@@ -13,7 +13,10 @@ define([
 
 
 
-        $el = this.$el;
+        var $el = this.$el;
+        console.log($el);
+
+        el = this.el;
 
         var model = this.model
 
@@ -26,21 +29,20 @@ define([
         console.log("SettingsView: ");
         console.log(model);
 
-        $("#settings-close-button").click(function(){
+        $el.on('hidden.bs.modal', function(){
+          console.log("modal closed");
           var backgroundImageUrl = $("#input-backround-image-url").val()
           if(backgroundImageUrl.length > 0){
             backgroundModel.set("url", backgroundImageUrl);
             backgroundModel.set("type", "image");
           }
-          elem.find("#my-awesome-dropzone").remove();
         });
 
         var elem = $("#settingsModal");
 
-        $("#settings-icon").click(function(){
-          $('#settingsModal').modal();
 
-          var  drop = $("#my-awesome-dropzone").clone();
+
+        var  drop = $("#my-awesome-dropzone").clone();
           $("#input-background-image").append(drop);
           drop.dropzone( 
           {
@@ -79,14 +81,14 @@ define([
             });
           });
 
-
-        });
-
         return this;
+
       }, 
 
       modal : function(){
-        this.el.modal();
+        var elem = $("#settingsModal");
+        console.log("settings view modal called");
+        elem.modal();
       }
 
     });
