@@ -1,7 +1,9 @@
 define([
   'underscore',
   'backbone',
-  ], function(_, Backbone){    
+  'models/BackgroundModel',
+  'views/BackgroundView'
+  ], function(_, Backbone, BackgroundModel, BackgroundView){    
 
     console.log("background view called");
 
@@ -28,6 +30,12 @@ define([
 
         console.log("SettingsView: ");
         console.log(model);
+
+        var currentBackground = { url : $("#page-background").css("background-image").split("url(")[1].split(")")[0] };
+        var backgroundModel = new BackgroundModel( currentBackground );
+        console.log(backgroundModel);
+        var backgroundView = new BackgroundView({model : backgroundModel});
+        backgroundView.render();
 
         $el.on('hidden.bs.modal', function(){
           console.log("modal closed");
