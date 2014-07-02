@@ -2,6 +2,7 @@ chrome.storage.local.get("background", function(object){
   var bgImage = object["background"];
   //document.body.style.backgroundImage = "url(" + bgImageUrl + " )";
   $("#page-background").css("background-image",  "url(" + bgImage.url + " )" );
+  console.log("background image assigned");
 
   if(bgImage.type == "image"){
     $("#page-background").css("background-repeat", "no-repeat");
@@ -15,14 +16,14 @@ chrome.storage.local.get("background", function(object){
     $("#page-background").css("background-position", "initial");
     $("#page-background").css("background-size", "initial");
     $("#page-background").css("-webkit-filter", "initial");
-    $(".myIcon").ready(function(){
+    /*$(".myIcon").ready(function(){
         $(".myIcon").blurjs({
-        source: '#page-background',
-        radius: 7,
-        draggable : true,
-        overlay: 'rgba(255,255,255,0.4)'
-      });
-    });
+          source: '#page-background',
+          radius: 7,
+          draggable : true,
+          overlay: 'rgba(255,255,255,0.4)'
+        });
+    });*/
   }
 
 });

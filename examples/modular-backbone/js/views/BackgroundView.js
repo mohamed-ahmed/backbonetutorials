@@ -51,6 +51,9 @@ define([
             }
           }
         });
+  
+        
+        
 
         console.log("BackgroundView: ");
         console.log(model);

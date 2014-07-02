@@ -50,7 +50,6 @@ define([
 
 
 
-
       //var compiledTemplate = _.template( appsListTemplate, data );
       //$("#apps-list").html( compiledTemplate ); 
     }
