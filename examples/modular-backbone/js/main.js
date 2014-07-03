@@ -8,6 +8,7 @@ require.config({
     jquery: 'libs/jquery/jquery-min',
     bootstrap: 'libs/bootstrap/bootstrap',
     dropzone : 'libs/dropzone/dropzone',
+    blurjs : 'libs/blur',
     underscore: 'libs/underscore/underscore-min',
     backbone: 'libs/backbone/backbone-min',
     templates: '../templates'

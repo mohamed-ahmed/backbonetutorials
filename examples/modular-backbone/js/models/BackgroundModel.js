@@ -12,10 +12,10 @@ define([
 
 
 				model.on("change", function(){
+					model.sync("update", model);
 					console.log("background model has changed");
-					if(model.hasChanged("url")){
-						model.sync("update", model);
-					}
+					/*if(model.hasChanged("url")){
+					}*/
 				});
 
 

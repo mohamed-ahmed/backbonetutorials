@@ -17,11 +17,11 @@ define([
       render : function() {
 
 
-          this.$el.html(this.template(this.model.attributes));
-          var model = this.model;
-          var $el = this.$el;
+        this.$el.html(this.template(this.model.attributes));
+        var model = this.model;
+        var $el = this.$el;
 
-          var elem = this.$el.find("#icon");
+        var elem = this.$el.find(".myIcon");
 
           //var myDropzone = new Dropzone("div#myId", { url: "/file/post"});
 
@@ -33,7 +33,7 @@ define([
             }
             if(model.hasChanged("title")){
               console.log("\n\t title url changed\n\n");
-              elem.find("#url-text").text(model.get("title"));
+              elem.find(".url-text").text(model.get("title"));
             }
 
           });
@@ -69,6 +69,32 @@ define([
 
           //console.log(elem[0]);
           $("#mostVisited_div").append(elem);
+          $(elem).waitUntilExists(function(){
+            console.log("elem loaded");
+            //wait for background image to load
+            var src = $('#page-background').css('background-image');
+            var url = src.match(/\((.*?)\)/)[1].replace(/('|")/g,'');
+            console.log(url);
+
+            var img = new Image();
+            var loadAgain = true;
+            img.onload = function() {
+                console.log("image loaded");
+                loadAgain = false;
+                $(elem).blurjs({
+                  source: '#page-background',
+                  radius: 7,
+                  draggable : true,
+                  overlay: 'rgba(255,255,255,0.4)'
+                });
+                
+            }
+            img.src = url;
+            if (img.complete && loadAgain){
+              img.onload();
+            }
+
+          });
 
           return this;
         }
@@ -78,3 +104,35 @@ define([
 return AppView;
 
 }); 
+
+
+(function ($) {
+
+/**
+* @function
+* @property {object} jQuery plugin which runs handler function once specified element is inserted into the DOM
+* @param {function} handler A function to execute at the time when the element is inserted
+* @param {bool} shouldRunHandlerOnce Optional: if true, handler is unbound after its first invocation
+* @example $(selector).waitUntilExists(function);
+*/
+
+$.fn.waitUntilExists    = function (handler, shouldRunHandlerOnce, isChild) {
+    var found       = 'found';
+    var $this       = $(this.selector);
+    var $elements   = $this.not(function () { return $(this).data(found); }).each(handler).data(found, true);
+
+    if (!isChild)
+    {
+        (window.waitUntilExists_Intervals = window.waitUntilExists_Intervals || {})[this.selector] =
+            window.setInterval(function () { $this.waitUntilExists(handler, shouldRunHandlerOnce, true); }, 500)
+        ;
+    }
+    else if (shouldRunHandlerOnce && $elements.length)
+    {
+        window.clearInterval(window.waitUntilExists_Intervals[this.selector]);
+    }
+
+    return $this;
+}
+
+}(jQuery));

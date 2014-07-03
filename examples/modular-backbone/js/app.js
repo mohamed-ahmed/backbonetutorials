@@ -1,17 +1,46 @@
 chrome.storage.local.get("background", function(object){
-  var bgImageUrl = object["background"];
+  var bgImage = object["background"];
   //document.body.style.backgroundImage = "url(" + bgImageUrl + " )";
-  $("#page-background").css("background-image",  "url(" + bgImageUrl + " )" );
+  $("#page-background").css("background-image",  "url(" + bgImage.url + " )" );
+  console.log("background image assigned");
+
+  if(bgImage.type == "image"){
+    $("#page-background").css("background-repeat", "no-repeat");
+    $("#page-background").css("background-attachment", "fixed");
+    $("#page-background").css("background-position", "center");
+  }
+  if(bgImage.type == "tile"){
+    console.log("background type = tile");
+    $("#page-background").css("background-repeat", "repeat");
+    $("#page-background").css("background-attachment", "none");
+    $("#page-background").css("background-position", "initial");
+    $("#page-background").css("background-size", "initial");
+    $("#page-background").css("-webkit-filter", "initial");
+    /*$(".myIcon").ready(function(){
+        $(".myIcon").blurjs({
+          source: '#page-background',
+          radius: 7,
+          draggable : true,
+          overlay: 'rgba(255,255,255,0.4)'
+        });
+    });*/
+  }
+
 });
 
 /*var bgImageUrl = readCookie("background");
 
 $("#page-background").css("background-image",  "url(" + bgImageUrl + " )" );*/
 
-console.log("app started " + (new Date()).getTime() );
+var started = (new Date()).getTime();
+console.log("app started " + started );
+
+var timeGotSites;
 
 chrome.topSites.get(function(localTopSites){
-  console.log("got top sites at: " + (new Date()).getTime());
+  timeGotSites = (new Date()).getTime();
+  console.log("got top sites at: " + timeGotSites );
+  console.log("took: " + (timeGotSites-started) + " miliseconds");
 }); 
 
 
@@ -24,8 +53,15 @@ define([
   'underscore', 
   'backbone',
   'router', // Request router.js
-  ], function($, bootstrap, _, Backbone, Router){
+  'views/AppsView'
+  ], function($, bootstrap, _, Backbone, Router, AppsView){
     var initialize = function(){
+
+    timeAppjsStarted = (new Date()).getTime();
+    console.log("timeAppjsStarted took: " + (timeAppjsStarted-started) + " miliseconds");
+
+    var appsView = new AppsView();
+    appsView.render();
     // Pass in our Router module and call it's initialize function
     Router.initialize();
   };
