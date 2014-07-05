@@ -26,17 +26,17 @@ define([
           //var myDropzone = new Dropzone("div#myId", { url: "/file/post"});
 
 
-          model.on("change", function(){
-            if(model.hasChanged("imageUrl")){
-              //console.log("\n\nimage url changed\n\n");
-              elem.find("#icon-img").attr("src", model.get("imageUrl"));
-            }
-            if(model.hasChanged("title")){
-              console.log("\n\t title url changed\n\n");
-              elem.find(".url-text").text(model.get("title"));
-            }
+        model.on("change", function(){
+          if(model.hasChanged("imageUrl")){
+            //console.log("\n\nimage url changed\n\n");
+            elem.find("#icon-img").attr("src", model.get("imageUrl"));
+          }
+          if(model.hasChanged("title")){
+            console.log("\n\t title url changed\n\n");
+            elem.find(".url-text").text(model.get("title"));
+          }
 
-          });
+        });
 
           model.on("destroy", function(){
             console.log("AppView: model being deleted");
@@ -69,7 +69,15 @@ define([
 
           //console.log(elem[0]);
           $("#mostVisited_div").append(elem);
-          $(elem).waitUntilExists(function(){
+
+          $(elem).blurjs({
+            source: 'body',
+            radius: 7,
+            draggable : true,
+            overlay: 'rgba(255,255,255,0.4)'
+          });
+
+          /*$(elem).waitUntilExists(function(){
             console.log("elem loaded");
             //wait for background image to load
             var src = $('#page-background').css('background-image');
@@ -81,7 +89,7 @@ define([
             img.onload = function() {
                 console.log("image loaded");
                 loadAgain = false;
-                $(elem).blurjs({
+                /*$(elem).blurjs({
                   source: '#page-background',
                   radius: 7,
                   draggable : true,
@@ -94,7 +102,7 @@ define([
               img.onload();
             }
 
-          });
+          });*/
 
           return this;
         }
