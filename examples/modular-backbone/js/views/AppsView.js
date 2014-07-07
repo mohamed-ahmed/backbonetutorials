@@ -5,14 +5,16 @@ define([
   'views/sidebar/SidebarView',
   'models/AppModel',
   'models/BackgroundModel',
+  'models/ClockModel',
   'models/SettingsModel',
   'collections/AppsCollection',
   'views/AppsListView',
   'views/BackgroundView',
+  'views/ClockView',
   'views/SettingsView',
   'text!templates/appsTemplate.html',
   'Utils'
-  ], function($, _, Backbone, SidebarView, AppModel, BackgroundModel, SettingsModel, AppsCollection, AppsListView, BackgroundView, SettingsView, appsTemplate, Utils){
+  ], function($, _, Backbone, SidebarView, AppModel, BackgroundModel, ClockModel, SettingsModel, AppsCollection, AppsListView, BackgroundView, ClockView, SettingsView, appsTemplate, Utils){
 
     var appsCollection;
     var AppsView = Backbone.View.extend({
@@ -163,6 +165,10 @@ define([
           }
         }      
       });
+
+      var clockModel = new ClockModel();
+      var clockView = new ClockView( { model : clockModel} );
+      clockView.render();
 
 
 

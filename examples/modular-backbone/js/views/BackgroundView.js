@@ -32,7 +32,6 @@ define([
             console.log("type has changed");
             if(model.type == "image"){
               $el.css("background-repeat", "no-repeat");
-              $el.css("background-attachment", "fixed");
               $el.css("background-position", "center");
             }
             if(model.get("type") == "tile"){
@@ -52,7 +51,7 @@ define([
           }
         });
   
-        
+
         
 
         console.log("BackgroundView: ");

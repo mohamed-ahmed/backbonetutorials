@@ -6,7 +6,6 @@ chrome.storage.local.get("background", function(object){
 
   if(bgImage.type == "image"){
     $("#page-background").css("background-repeat", "no-repeat");
-    $("#page-background").css("background-attachment", "fixed");
     $("#page-background").css("background-position", "center");
   }
   if(bgImage.type == "tile"){

@@ -136,7 +136,14 @@ body{
   padding-right: 1mm;
 }
 
-
+#clock{
+  position: fixed;
+  bottom: 0px;
+  left: 10px;
+  font-size: 5vh;
+  color: white;
+  font-family: 'Roboto', sans-serif;
+}
 
 .tool-bar-icon{
   border: solid;
