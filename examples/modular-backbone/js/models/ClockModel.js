@@ -4,7 +4,7 @@ define([
 	'Utils',
 	], function(_, Backbone, Utils) {
 
-		var AppModel = Backbone.Model.extend({
+		var ClockModel = Backbone.Model.extend({
 
 			initialize: function(){
 								
@@ -13,12 +13,10 @@ define([
 
 
 
-			
-
 
 
 		});
 
-		return AppModel;
+		return ClockModel;
 
 	});
