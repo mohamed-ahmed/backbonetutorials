@@ -26,6 +26,7 @@
 	 			case "update":
 	 				console.log("model being updated");
 	 				//model.collection.remove(model);
+	 				console.log(model.attributes);
 	 				Utils.saveLocal( Utils.getUniquePage(model.get("url")),  model.attributes, function(){
 	 					console.log("model saved")} );
 	 				break;

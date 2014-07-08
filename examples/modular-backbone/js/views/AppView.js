@@ -28,12 +28,12 @@ define([
 
         model.on("change", function(){
           if(model.hasChanged("imageUrl")){
-            //console.log("\n\nimage url changed\n\n");
+            console.log("\n\nimage url changed\n\n");
             elem.find("#icon-img").attr("src", model.get("imageUrl"));
           }
           if(model.hasChanged("title")){
             console.log("\n\t title url changed\n\n");
-            elem.find(".url-text").text(model.get("title"));
+            elem.find("#url-text").text(model.get("title"));
           }
 
         });
