@@ -33,6 +33,7 @@ define([
             if(model.type == "image"){
               $el.css("background-repeat", "no-repeat");
               $el.css("background-position", "center");
+              $el.css("background-size", "cover");
             }
             if(model.get("type") == "tile"){
               console.log("background type = tile");

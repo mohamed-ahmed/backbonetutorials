@@ -31,25 +31,32 @@ define([
         console.log("SettingsView: ");
         console.log(model);
 
-        var currentBackground = { url : $("#page-background").css("background-image").split("url(")[1].split(")")[0], type : "null" };
-        var backgroundModel = new BackgroundModel( currentBackground );
-        this.backgroundModel = backgroundModel;
-        console.log(backgroundModel);
-        var backgroundView = new BackgroundView({model : backgroundModel});
-        backgroundView.render();
+        chrome.storage.local.get("background", function(object){
+          var bgImage = object["background"];
+          var currentBackground = { url : $("#page-background").css("background-image").split("url(")[1].split(")")[0], type : "null" };
+          if(bgImage.type){
+            currentBackground.type = bgImage.type;
+          }
+          var backgroundModel = new BackgroundModel( currentBackground );
+          this.backgroundModel = backgroundModel;
+          console.log(backgroundModel);
+          var backgroundView = new BackgroundView({model : backgroundModel});
+          backgroundView.render();
 
-        $el.on('hidden.bs.modal', function(){
-          console.log("modal closed");
-          var backgroundImageUrl = $("#input-backround-image-url").val();
-          var backgroundTileUrl = $("#input-backround-tile-url").val();
-          if(backgroundImageUrl.length > 0){
-            backgroundModel.set("url", backgroundImageUrl);
-            backgroundModel.set("type", "image");
-          }
-          else if(backgroundTileUrl.length > 0){
-            backgroundModel.set("url", backgroundTileUrl);
-            backgroundModel.set("type", "tile");
-          }
+          $el.on('hidden.bs.modal', function(){
+            console.log("modal closed");
+            var backgroundImageUrl = $("#input-backround-image-url").val();
+            var backgroundTileUrl = $("#input-backround-tile-url").val();
+            if(backgroundImageUrl.length > 0){
+              backgroundModel.set("url", backgroundImageUrl);
+              backgroundModel.set("type", "image");
+            }
+            else if(backgroundTileUrl.length > 0){
+              backgroundModel.set("url", backgroundTileUrl);
+              backgroundModel.set("type", "tile");
+            }
+
+          });
 
         });
 
