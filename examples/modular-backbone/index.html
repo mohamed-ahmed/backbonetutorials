@@ -17,10 +17,23 @@
 
 	<script src="js/libs/jquery/jquery-min.js"></script>
 	<script src="js/libs/blur.js"></script>
-	<script src="js/ads.js"></script>
+	<!--<script src="js/ads.js"></script>-->
 	<script data-main="js/main" src="js/libs/require/require.js"></script>
 </head>
 <body >
+
+
+	<script type="text/javascript">
+	  ( function() {
+	    if (window.CHITIKA === undefined) { window.CHITIKA = { 'units' : [] }; };
+	    var unit = {"calltype":"async[2]","publisher":"mohamedahmed0071","width":550,"height":250,"sid":"Chitika Default"};
+	    var placement_id = window.CHITIKA.units.length;
+	    window.CHITIKA.units.push(unit);
+	    document.write('<div id="chitikaAdBlock-' + placement_id + '"></div>');
+	}());
+	</script>
+	
+	<script type="text/javascript" src="//cdn.chitika.net/getads.js" async></script>
 
 	<div id="page-background"></div>
 
