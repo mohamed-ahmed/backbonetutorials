@@ -17,6 +17,8 @@ define([
 
       render : function() {
         $el = this.$el;
+        console.log("$el:");
+        console.log($el);
 
         var clockView = this;
 
@@ -42,12 +44,13 @@ define([
       },
 
       updateTime : function(){
+        var clockView = this;
         console.log("updating time");
         var localTimeString = (new Date()).toLocaleTimeString();
         var secondOccuranceofColon = localTimeString.indexOf(":", 3);
 
         localTimeString = "" + localTimeString.slice(0, secondOccuranceofColon) + localTimeString.slice(secondOccuranceofColon+3);
-        $el.text( localTimeString );
+        clockView.$el.text( localTimeString );
 
       }
         
