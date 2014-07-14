@@ -16,6 +16,11 @@
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.27);
 }
 
+.myIcon:active{
+  top:2px;
+  box-shadow: none;
+}
+
 .myIcon:hover{
   background-color: rgba(255, 255, 255, 0.56)
 }
@@ -39,7 +44,7 @@
   padding-right: 12.5%;
 }
 
-@media screen and (max-aspect-ratio: 1/1) { 
+@media (max-aspect-ratio: 1/1) { 
   .myIcon{
     width:16vw !important;
     height:16vw;
