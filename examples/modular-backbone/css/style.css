@@ -17,12 +17,22 @@
 }
 
 .myIcon:active{
-  top:2px;
+  top:0.3mm;
   box-shadow: none;
 }
 
 .myIcon:hover{
   background-color: rgba(255, 255, 255, 0.56)
+}
+
+
+#icon-img{
+  height: 5vh;
+  width: 5vh;
+  margin: auto;
+  margin-top: 10%;
+  margin-bottom: 5%;
+  display:block;
 }
 
 #url-text{
@@ -54,6 +64,11 @@
 
   #url-text{
     font-size: 2vw;
+  }
+
+  #icon-img{
+    height: 5vw;
+    width: 5vw;
   }
 }
 
@@ -109,14 +124,6 @@ body{
   font-size: 20px;
 }
 
-#icon-img{
-  height: 31.25%;
-  width: 31.25%;
-  margin: auto;
-  margin-top: 10%;
-  margin-bottom: 5%;
-  display:block;
-}
 
 #mostVisited_div{
   margin-top: 40px;
