@@ -121,11 +121,11 @@
 				//console.log(imageURL);
 				Utils.tryImage(imageURL,
 					function(){				//success
-						//console.log("sucess");
+						console.log("success");
 						callback(imageURL);
 					},
 					function(){				//failure
-						//console.log("failure");
+						console.log("failure");
 						callback("imgs/browser-icon.png")
 					}
 
@@ -136,12 +136,18 @@
 		};
 
 		Utils.tryImage = function(url, success, failure){
-			$.ajax({
+			/*$.ajax({
 				type: "GET",
 				url: url,
 				success: success,
 				error: failure
-			});
+			});*/
+			if(Utils.imageExists(url)){
+				success();
+			}
+			else{
+				failure();
+			}
 		};
 
 		Utils.getFaviconUrl = function(url){
@@ -179,7 +185,7 @@
 				absUrl = siteUrl + imagePath;
 			}
 
-			//console.log("full path is:  " + absUrl);
+			console.log("full path is:  " + absUrl);
 
 			return absUrl;
 		}
@@ -408,6 +414,22 @@
 		}
 
 
+		Utils.imageExists = function(image_url){
+
+			var http = new XMLHttpRequest();
+
+			http.open('HEAD', image_url, false);
+			try{
+				http.send();
+			}
+			catch(e){
+				console.log(e);
+				return false;
+			}
+
+			return http.status != 404;
+
+		}
 
 
 		return Utils;
