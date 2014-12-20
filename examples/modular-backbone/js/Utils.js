@@ -117,8 +117,8 @@
 					imageURL = Utils.getFaviconUrl(pageURL);
 				}
 
-				//console.log("getBestImageURL: ");
-				//console.log(imageURL);
+				console.log("getBestImageURL: ");
+				console.log(imageURL);
 				Utils.tryImage(imageURL,
 					function(){				//success
 						console.log("success");
@@ -247,15 +247,18 @@
 			else return url.split("/")[0].toLowerCase();
 		}*/
 
-		Utils.saveLocal = function(key, value){
+		Utils.saveLocal = function(key, value, callback){
 			var keyValueObj = {};
 			keyValueObj[key] = value;
-			chrome.storage.local.set( keyValueObj, function() {
-				//console.log("saving: ");
-				//console.log(keyValueObj);
-				//console.log(keyValueObj[key]);
-				console.log(' saved');
-			});
+			if(callback === undefined){
+				callback = function() {
+					//console.log("saving: ");
+					//console.log(keyValueObj);
+					//console.log(keyValueObj[key]);
+					console.log('saved');
+				}
+			}
+			chrome.storage.local.set( keyValueObj, callback);
 		}
 
 		Utils.saveSync = function(key, value, callback){
