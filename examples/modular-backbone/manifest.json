@@ -1,5 +1,5 @@
 {
-	"name": "Smart New Tab Page 2",
+	"name": "Smarter New Tab Page",
 	"description": "Creats app icons for your most visited sites",
 
 	"permissions": ["topSites", "<all_urls>", "storage"],
