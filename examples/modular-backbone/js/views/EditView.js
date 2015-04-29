@@ -60,6 +60,12 @@ define([
 
             var newImageUrl = elem.find("#input-image-url").val();
             if(newImageUrl.length > 0 ){
+              if(Utils.isCached(newImageUrl) === false ){
+                console.log("not cached");
+              }
+              else{
+                console.log("cached");
+              }
               Utils.imgToDataURL(newImageUrl, function(err, resultString){
                 model.set({ imageUrl : resultString });
               });

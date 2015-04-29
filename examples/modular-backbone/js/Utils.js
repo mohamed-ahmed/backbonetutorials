@@ -434,6 +434,19 @@
 
 		}
 
+		/**
+		 * Returns if an image is cached or not
+		 * @param  {string}  src  - image URL
+		 * @return {Boolean}     cached or not
+		 */
+		Utils.isCached = function(src) {
+			console.log("checking cache for: " + src);
+		    var image = new Image();
+		    image.src = src;
+
+		    return image.complete;
+		}
+
 
 		return Utils;
 
