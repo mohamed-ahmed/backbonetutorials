@@ -274,6 +274,17 @@
 			});
 		}
 
+		/**
+		 * prints value of local function
+		 * @param  {[type]} key - key
+		 * @return {null}
+		 */
+		Utils.printLocalStorage = function(key){
+			chrome.storage.local.get(key, function (value){
+				console.log(value);
+			})
+		};
+
 		Utils.addToLocalSiteCollection = function(key, newValue){
 			var collection;
 			var existingEntry = false;
@@ -293,7 +304,7 @@
 					console.log("collection saved");
 				})
 			});
-		}
+		};
 
 		Utils.addToSyncSiteCollection = function(key, newValue){
 			var collection;
@@ -314,7 +325,7 @@
 					console.log("collection saved");
 				})
 			});
-		}
+		};
 
 		Utils.getUniquePage = function(url){
 			var uniqueUrl = url;
